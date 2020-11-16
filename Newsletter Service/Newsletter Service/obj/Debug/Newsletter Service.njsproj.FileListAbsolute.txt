@@ -1,0 +1,3 @@
+C:\Users\LoL-1\OneDrive - University of Plymouth\Year 3\COMP3006\COMP3006-NewsletterService\Newsletter Service\Newsletter Service\obj\Debug\Newsletter Service.njsprojAssemblyReference.cache
+C:\Users\LoL-1\OneDrive - University of Plymouth\Year 3\COMP3006\COMP3006-NewsletterService\Newsletter Service\Newsletter Service\obj\Debug\Newsletter Service.njsproj.CoreCompileInputs.cache
+C:\Users\LoL-1\OneDrive - University of Plymouth\Year 3\COMP3006\COMP3006-NewsletterService\Newsletter Service\Newsletter Service\bin\Microsoft.NodejsTools.WebRole.dll

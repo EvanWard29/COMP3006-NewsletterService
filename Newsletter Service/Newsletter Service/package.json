@@ -1,0 +1,9 @@
+{
+  "name": "newsletter-service",
+  "version": "0.0.0",
+  "description": "Newsletter Service",
+  "main": "server.js",
+  "author": {
+    "name": ""
+  }
+}
