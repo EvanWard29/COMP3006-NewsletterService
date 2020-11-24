@@ -1,37 +1,25 @@
-let http = require("http");
-let url = require("url");
-let fs = require("fs");
-let port = 9000;
+let express = require("express");
 let path = require("path");
+let http = require("http");
 
-let server = http.createServer(function(req, res) {
-  res.writeHead(200, {"Access-Control-Allow-Origin": "*"});
-  let urlParts = url.parse(req.url, true);
+// Set up the server and app.
+let app = express();
+let server = http.createServer(app);
 
-  let permittedFiles = /(.html|.js|.css)/gi;
+// Configure statics.
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "css")));
+app.use(express.static(path.join(__dirname, "js")));
 
-  if (urlParts.path.search(permittedFiles) !== -1) {
-    fs.readFile(__dirname + urlParts.path, function(err, file) {
-        if (urlParts.path.indexOf(".html")) {
-            res.writeHead(200, { "Content-Type": "text/html" });
-        } else if (urlParts.path.indexOf(".html")) {
-            res.writeHead(200, { "Content-Type": "text/javascript" });
-        } else {
-            //res.writeHead(200, { "Content-Type": "text/css" });
-            //let fileContents = fs.readFileSync('../assets/css/main.css', { encoding: 'utf-8' });
-            //res.write(fileContents);
-        }
-        
+server.listen(9000, function () {
+    console.log("Listening on 9000");
+})
 
-      res.end(file);
-    });
-  } else {
-    res.writeHead(404);
-    res.end();
-  }
-});
 
-server.listen(port, function() {
-  console.log("Server listening on " + port);
-});
- 
+
+
+
+
+
+
+

@@ -35,13 +35,14 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="assets\css\main.css" />
     <Content Include="assets\css\main.css">
       <SubType>Code</SubType>
       <Publish>True</Publish>
     </Content>
-    <Content Include="assets\js\main.js" />
-    <Content Include="public\main.html">
+    <Content Include="css\main.css" />
+    <Content Include="js\main.js" />
+    <Content Include="public\main.html" />
+    <Content Include="public\account.html">
       <SubType>Code</SubType>
     </Content>
     <Content Include="server.js" />
@@ -51,12 +52,13 @@
   <ItemGroup>
     <Folder Include="assets\" />
     <Folder Include="assets\css\" />
-    <Folder Include="assets\js\" />
+    <Folder Include="css\" />
+    <Folder Include="js\" />
+    <Folder Include="js\collections\" />
+    <Folder Include="js\models\" />
+    <Folder Include="js\templates\" />
+    <Folder Include="js\views\" />
     <Folder Include="public\" />
-    <Folder Include="src\" />
-    <Folder Include="src\controller\" />
-    <Folder Include="src\model\" />
-    <Folder Include="src\view\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>
