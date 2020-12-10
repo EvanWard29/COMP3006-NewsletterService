@@ -1,37 +1,53 @@
-let http = require("http");
-let url = require("url");
-let fs = require("fs");
-let port = 9000;
+//Imports
+let express = require("express");
 let path = require("path");
+let http = require("http");
+let bodyParser = require("body-parser")
+let routes = require("./js/routes/routes.js");
 
-let server = http.createServer(function(req, res) {
-  res.writeHead(200, {"Access-Control-Allow-Origin": "*"});
-  let urlParts = url.parse(req.url, true);
+// Setup the Server and App.
+let app = express();
+let server = http.createServer(app);
 
-  let permittedFiles = /(.html|.js|.css)/gi;
+// Setup Database Connection
+let mongoose = require("mongoose");
+let url = "mongodb://localhost:27017/newsletter";
+mongoose.connect(url, { useUnifiedTopology: true, useNewUrlParser: true });
 
-  if (urlParts.path.search(permittedFiles) !== -1) {
-    fs.readFile(__dirname + urlParts.path, function(err, file) {
-        if (urlParts.path.indexOf(".html")) {
-            res.writeHead(200, { "Content-Type": "text/html" });
-        } else if (urlParts.path.indexOf(".html")) {
-            res.writeHead(200, { "Content-Type": "text/javascript" });
-        } else {
-            //res.writeHead(200, { "Content-Type": "text/css" });
-            //let fileContents = fs.readFileSync('../assets/css/main.css', { encoding: 'utf-8' });
-            //res.write(fileContents);
-        }
-        
-
-      res.end(file);
-    });
-  } else {
-    res.writeHead(404);
-    res.end();
-  }
+//Connection Handling
+mongoose.connection.on('error', function () { console.log("Error Connecting to DB") });
+mongoose.connection.on('disconnected', function () { console.log("Disconnected From DB") });
+mongoose.connection.on('connected', function () {
+    console.log("Connected to DB: " + mongoose.connection.db.databaseName);
 });
 
-server.listen(port, function() {
-  console.log("Server listening on " + port);
-});
- 
+
+//POST Form Processing
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+//View Engine Configuration
+app.set("views", path.join(__dirname, "js/views"));
+app.set("view engine", "ejs");
+
+//Statics
+app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "css")));
+app.use(express.static(path.join(__dirname, "js")));
+
+//Routes
+app.post("/api/getUsers", routes.getAllUsers);
+app.post("/api/getTopics", routes.getAllTopics);
+app.post("/api/getSubscriptions", routes.getAllSubscriptions);
+
+server.listen(9000, function () {
+    console.log("Listening on 9000");
+})
+
+
+
+
+
+
+
+

@@ -5,7 +5,7 @@
     <Name>Newsletter Service</Name>
     <RootNamespace>Newsletter Service</RootNamespace>
     <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
-    <LaunchUrl>/public/main.html</LaunchUrl>
+    <LaunchUrl>/users</LaunchUrl>
     <ScriptArguments>
     </ScriptArguments>
     <NodeExeArguments>
@@ -25,7 +25,7 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <NodejsPort>9000</NodejsPort>
+    <NodejsPort>9001</NodejsPort>
     <StartWebBrowser>True</StartWebBrowser>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -35,28 +35,43 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="assets\css\main.css" />
-    <Content Include="assets\css\main.css">
-      <SubType>Code</SubType>
-      <Publish>True</Publish>
-    </Content>
-    <Content Include="assets\js\main.js" />
-    <Content Include="public\main.html">
+    <Content Include="css\main.css" />
+    <Content Include="js\collections\db.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="js\main.js" />
+    <Content Include="js\models\Subscription.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="js\models\User.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="js\models\Topic.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="js\routes\routes.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="js\views\users.ejs">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="public\account.html">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="public\main.html" />
     <Content Include="server.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="assets\" />
-    <Folder Include="assets\css\" />
-    <Folder Include="assets\js\" />
+    <Folder Include="css\" />
+    <Folder Include="js\" />
+    <Folder Include="js\collections\" />
+    <Folder Include="js\models\" />
+    <Folder Include="js\routes\" />
+    <Folder Include="js\templates\" />
+    <Folder Include="js\views\" />
     <Folder Include="public\" />
-    <Folder Include="src\" />
-    <Folder Include="src\controller\" />
-    <Folder Include="src\model\" />
-    <Folder Include="src\view\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>
