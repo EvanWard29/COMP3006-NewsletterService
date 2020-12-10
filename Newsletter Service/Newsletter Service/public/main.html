@@ -10,10 +10,16 @@
     <link href="/main.css" rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- CLASSES -->
+    <script src="models/User.js"></script>
+    <script src="models/Topic.js"></script>
+    <script src="models/Subscription.js"></script>
+
+    <script src="controller/apiCalls.js"></script>
     <script src="main.js"></script>
 
     <style>
-        
     </style>
 
 </head>
@@ -22,10 +28,10 @@
         <div class="container-fluid header">
             <div class="row headerLink">
                 <div class="col">
-                    <h1 style="text-align:left;">This Is It</h1>
+                    <a href="main.html"><h1 style="text-align:left;">This Is It</h1></a>
                 </div>
                 <div class="col">
-                    <a href="#"><h4 style="text-align: right;">My Account</h4></a>
+                    <a href="account.html"><h4 style="text-align: right;">My Account</h4></a>
                 </div>
             </div>
             
@@ -36,11 +42,8 @@
             <div class="container-fluid">
                 <h3>TOPICS</h3>
                 <table class="table table-bordered table-hover">
-                    <tbody>
-                        <tr><td><h4>TOPIC</h4></td></tr>
-                        <tr><td><h4>TOPIC</h4></td></tr>
-                        <tr><td><h4>TOPIC</h4></td></tr>
-                        <tr><td><h4>TOPIC</h4></td></tr>
+                    <tbody id="topics">
+                        <tr><td id="111">HELLO</td></tr>
                     </tbody>
                 </table>
             </div>
