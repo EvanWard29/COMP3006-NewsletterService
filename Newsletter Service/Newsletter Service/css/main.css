@@ -34,6 +34,14 @@ h3{
 
 }
 
+.invalid{
+    color: red;
+}
+
+table{
+    margin-top: 15px;
+}
+
 td{
     text-align: center;
     font-weight: bold;

@@ -9,8 +9,12 @@ let topicSchema = new mongoose.Schema({
 let Topic = mongoose.model('topics', topicSchema);
 
 async function getTopics() {
-    let topics = await Topic.find();//await mongoose.connection.db.collection('data').find();
+    let topics = await Topic.find().sort([["topicID", "asc"]]);
     return topics;
+}
+
+async function addTopic(topicID, topicName, topicDescription) {
+    await Topic.create({ topicID: topicID, topicName: topicName, topicDescription: topicDescription });
 }
 
 /* USER */
@@ -47,3 +51,4 @@ async function getSubscriptions() {
 module.exports.getUsers = getUsers;
 module.exports.getTopics = getTopics;
 module.exports.getSubscriptions = getSubscriptions;
+module.exports.addTopic = addTopic;

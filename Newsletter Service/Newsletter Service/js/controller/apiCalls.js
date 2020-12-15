@@ -9,7 +9,21 @@ $(function () {
 
         for (let i = 0; i < topics.length; i++) {
             await addTopic(new Topic(topics[i].topicID, topics[i].topicName, topics[i].topicDescription));
-            $('#topics').append("<tr><td id='" + Topics[i].topicID + "'>" + Topics[i].topicName + "</td></tr>");
+        }
+
+        let id = localStorage.getItem("topic");
+
+        if (id != null) {
+            for (let i = 0; i < Topics.length; i++) {
+                if (Topics[i].topicID == id) {
+                    $('#topicName').html(Topics[i].topicName);
+                    $('#topicDescription').html(Topics[i].topicDescription);
+                    break;
+                }
+            }
+        } else {
+            $('#topicName').html(Topics[0].topicName);
+            $('#topicDescription').html(Topics[0].topicDescription);
         }
     });
 

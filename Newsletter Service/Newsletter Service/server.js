@@ -39,6 +39,9 @@ app.use(express.static(path.join(__dirname, "js")));
 app.post("/api/getUsers", routes.getAllUsers);
 app.post("/api/getTopics", routes.getAllTopics);
 app.post("/api/getSubscriptions", routes.getAllSubscriptions);
+app.post("/api/addTopic", routes.addTopic);
+
+app.get("/main", routes.listAllTopics);
 
 server.listen(9000, function () {
     console.log("Listening on 9000");
