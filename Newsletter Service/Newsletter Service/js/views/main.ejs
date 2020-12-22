@@ -25,6 +25,7 @@
     <script src="models/User.js"></script>
     <script src="models/Topic.js"></script>
     <script src="models/Subscription.js"></script>
+    <script src="models/Newsletter.js"></script>
 
     <!-- JavaScript -->
     <script src="controller/apiCalls.js"></script>
@@ -48,7 +49,7 @@
 
         </div>
     </div>
-    <div class="row margin" style="height: 100vh">
+    <div class="row margin">
         <div class="col-2 outline">
             <div class="container-fluid">
                 <!-- TOPICS -->
@@ -64,18 +65,32 @@
         </div>
 
         <div class="col-8 outline">
-            <div class="container">
+            <div class="container description">
                 <!-- MAIN BODY -->
                 <h3 id="topicName"></h3>
-                <div class="container">
+                <div class="container" id="description">
                     <p id="topicDescription"></p>
+                </div>
+            </div>
+
+            <div class="row margin" style="height: 100vh; border: black solid">
+                <div id="newsletters" class="col overflow-auto" style="height: 100%">
+                    <% for(j = 0; j < newsletters.length; j++) { %>
+                    <div class="card margin" id="topic<%= newsletters[j].topicID %>" hidden>
+                        <div class="card-body newsletterCards">
+                            
+                            <p style="margin:5px" id="newsletter<%= newsletters[j].newsletterID %>"><%= newsletters[j].title %></p>
+                            
+                        </div>
+                    </div>
+                    <% } %>
                 </div>
             </div>
         </div>
         <div class="col-2 outline">
             <div class="container">
                 <!-- SOCIAL OPTIONS -->
-                <h3>SOCIAL OPTIONS</h3>
+                <h3>SOCIAL OPTIONS AND CHAT</h3>
             </div>
         </div>
     </div>
@@ -102,6 +117,27 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" id="btnAddChore">Add Topic</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Newsletter Popup -->
+    <div class="modal" id="newsletter" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newsTopic"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center"style="height:100vh">
+                    <iframe id="newsletterPDF" src="" class="pdf">
+                    </iframe>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
                 </div>
             </div>
         </div>

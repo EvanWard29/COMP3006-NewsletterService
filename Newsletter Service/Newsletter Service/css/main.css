@@ -50,3 +50,30 @@ td{
 label{
     font-size: 24px;
 }
+
+.description{
+    text-align: center;
+}
+
+.description #description {
+    border: black solid;
+}
+
+.description h3{
+    margin: 15px;
+}
+
+.description p {
+    margin: auto;
+    padding: 15px;
+}
+
+.pdf{
+    height: 100%;
+    width: 100%;
+}
+
+.newsletterCards {
+    padding: 15px;
+    font-weight: bold;
+}

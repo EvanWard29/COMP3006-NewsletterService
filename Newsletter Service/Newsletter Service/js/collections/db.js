@@ -48,7 +48,23 @@ async function getSubscriptions() {
     return subs;
 }
 
+/* NEWSLETTER*/
+let newsletterSchema = new mongoose.Schema({
+    newsletterID: Number,
+    topicID: Number,
+    title: String,
+    date: String,
+    url: String
+});
+let Newsletter = mongoose.model("newsletters", newsletterSchema);
+
+async function getNewsletters() {
+    let newsletters = await Newsletter.find();
+    return newsletters;
+}
+
 module.exports.getUsers = getUsers;
 module.exports.getTopics = getTopics;
 module.exports.getSubscriptions = getSubscriptions;
 module.exports.addTopic = addTopic;
+module.exports.getNewsletters = getNewsletters;

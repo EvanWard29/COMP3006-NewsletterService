@@ -4,6 +4,10 @@ let path = require("path");
 let http = require("http");
 let bodyParser = require("body-parser")
 let routes = require("./js/routes/routes.js");
+//let jQuery = require("jQuery");
+//let jsdom = require("jsdom").jsdom;
+
+
 
 // Setup the Server and App.
 let app = express();
@@ -31,7 +35,7 @@ app.set("views", path.join(__dirname, "js/views"));
 app.set("view engine", "ejs");
 
 //Statics
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "newsletters")));
 app.use(express.static(path.join(__dirname, "css")));
 app.use(express.static(path.join(__dirname, "js")));
 
@@ -41,7 +45,13 @@ app.post("/api/getTopics", routes.getAllTopics);
 app.post("/api/getSubscriptions", routes.getAllSubscriptions);
 app.post("/api/addTopic", routes.addTopic);
 
+app.post("/api/getNumNewsletters", routes.getNumNewsletters);
+app.post("/api/getNewsletters", routes.getNewsletters);
+app.post("/api/getNewsletterInfo", routes.getNewsletterInfo);
+
 app.get("/main", routes.listAllTopics);
+
+app.post("/main", routes.showNewsletters);
 
 server.listen(9000, function () {
     console.log("Listening on 9000");
