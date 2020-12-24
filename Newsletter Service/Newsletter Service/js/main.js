@@ -2,16 +2,12 @@ let Folders = [];
 $(function () {
     if (sessionStorage.getItem("ADMIN") == "true") {
         $('#btnNewTopic').attr('hidden', false);
+        $('#btnNewNewsletter').attr('hidden', false);
     }
     else {
         $('#btnNewTopic').attr('hidden', true);
+        $('#btnNewNewsletter').attr('hidden', true);
     }
-
-    //console.log(getNewsletters(localStorage.getItem("topic")));
-
-    //if (localStorage.getItem("topic") != null) {
-    //    getNewsletters(localStorage.getItem("topic"));
-    //}
 
     $("td").click(async function () {
         let id = $(this).attr('id');
@@ -68,6 +64,18 @@ $(function () {
             $('#newsletter').modal('show');
         }
     });
+
+    $('#btnNewNewsletter').click(function () {
+        $('#upload').modal('show');
+    });
+
+    /*$('#btnUpload').click(function () {
+        let newNewsletters = $('#newNewsletters').val();
+   
+        $.post("/api/uploadNewsletter", {
+            file: newNewsletters
+        })
+    });*/
 });
 
 function getNewsletters(id) {

@@ -1,5 +1,6 @@
 let db = require("../collections/db.js");
 let fs = require('fs');
+let multer = require('multer');
 let path = require("path");
 
 async function listAllTopics(request, response) {
@@ -12,17 +13,6 @@ async function listAllTopics(request, response) {
     };
 
     response.render("main", data);
-}
-
-async function showNewsletters(request, response) {
-    let newsletters = request.body.newsletters;
-    let topics = await db.getTopics();
-    let data = {
-        topics: topics,
-        newsletters: ["HELLO", "HI", "BYE"]
-    };
-    //console.log(newsletters);
-    //response.send("main", data);
 }
 
 async function getAllTopics(request, response) {
@@ -59,76 +49,28 @@ async function getNewsletters(request, response) {
     response.send(data);
 }
 
-async function getNumNewsletters(request, response) {
-    let dir = path.join(path.dirname(require.main.filename), 'newsletters/' + request.body.topicName);
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
 
-    fs.readdir(dir, function (err, data) {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            //let files = [];
-            //data.forEach(function (folderDate) {
-                //fs.readdir(dir + "/" + folderDate, function (err, file) {
-                //    if (err) {
-                //        console.log(err);
-                //    } else {
-                //        //files.push(fileData);
-                //        //temp.push(file);
-                        
-                //        let fileData = {
-                //            info: file[0],
-                //            pdf: file[1]
-                //        };
+    // By default, multer removes file extensions so let's add them back
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
 
-                //        //console.log(fileData);
-                //        files.push(fileData);
-                //    }
-                //});
-                //files.push(temp);
-                //console.log(temp);
-            //});
-            console.log(data);
-            response.send(data);
-        }
-    });
-}
+async function uploadNewsletters(request, response) {
+    let upload = multer({ storage: storage }).single('newNewsletters');
 
-/*async function getNewsletters(request, response) {
-    //let dir = path.join(path.dirname(require.main.filename), 'newsletters/' + request.body.topicName + "/" + request.body.date);
-
-    //fs.readdir(dir, function (err, files) {
-    //    if (err) {
-    //        console.log(err);
-    //    } else {
-    //        response.send(files);
-    //    }
-    //});
-
-    let dir = path.join(path.dirname(require.main.filename), 'newsletters/' + request.body.topicName);
-
-    fs.readdir(dir, function (err, files) {
+    upload(request, response, function (err) {
         if (err) {
             console.log(err);
         } else {
-            response.send(files);
-            //console.log(files);
+            console.log(request.file);
+            response.send('Single File');
         }
     });
-    
-}*/
-
-async function getNewsletterInfo(request, response) {
-    let dir = path.join(path.dirname(require.main.filename), 'newsletters/' + request.body.topicName + "/" + request.body.date);
-    let date = request.body.date;
-
-    fs.readdir(dir, function (err, files) {
-        if (err) {
-            console.log(err);
-        } else {
-            response.send(files);
-        }
-    })
 }
 
 module.exports.getAllUsers = getAllUsers;
@@ -136,8 +78,5 @@ module.exports.getAllTopics = getAllTopics;
 module.exports.getAllSubscriptions = getAllSubscriptions;
 module.exports.listAllTopics = listAllTopics;
 module.exports.addTopic = addTopic;
-
-module.exports.getNumNewsletters = getNumNewsletters;
 module.exports.getNewsletters = getNewsletters;
-module.exports.getNewsletterInfo = getNewsletterInfo;
-module.exports.showNewsletters = showNewsletters;
+module.exports.uploadNewsletters = uploadNewsletters;

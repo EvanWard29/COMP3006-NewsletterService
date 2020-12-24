@@ -78,12 +78,13 @@
                     <% for(j = 0; j < newsletters.length; j++) { %>
                     <div class="card margin" id="topic<%= newsletters[j].topicID %>" hidden>
                         <div class="card-body newsletterCards">
-                            
+
                             <p style="margin:5px" id="newsletter<%= newsletters[j].newsletterID %>"><%= newsletters[j].title %></p>
-                            
+
                         </div>
                     </div>
                     <% } %>
+                    <button id="btnNewNewsletter" class="btn btn-outline-primary btn-block" hidden>Upload Newsletter</button>
                 </div>
             </div>
         </div>
@@ -132,9 +133,38 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body text-center"style="height:100vh">
+                <div class="modal-body text-center" style="height:100vh">
                     <iframe id="newsletterPDF" src="" class="pdf">
                     </iframe>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Newsletter Popup -->
+    <div class="modal" id="upload" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Upload Newsletter</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+
+                    <form method="POST" action="/api/uploadNewsletter" enctype="multipart/form-data">
+                        <div>
+                            <input type="file" name="newNewsletters" />
+                        </div>
+                        <div>
+                            <input type="submit" name="btnUpload" value="Upload" />
+                        </div>
+                    </form>
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                     </div>

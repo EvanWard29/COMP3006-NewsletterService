@@ -4,6 +4,7 @@ let path = require("path");
 let http = require("http");
 let bodyParser = require("body-parser")
 let routes = require("./js/routes/routes.js");
+let multer = require('multer');
 //let jQuery = require("jQuery");
 //let jsdom = require("jsdom").jsdom;
 
@@ -25,7 +26,6 @@ mongoose.connection.on('connected', function () {
     console.log("Connected to DB: " + mongoose.connection.db.databaseName);
 });
 
-
 //POST Form Processing
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -44,14 +44,12 @@ app.post("/api/getUsers", routes.getAllUsers);
 app.post("/api/getTopics", routes.getAllTopics);
 app.post("/api/getSubscriptions", routes.getAllSubscriptions);
 app.post("/api/addTopic", routes.addTopic);
-
-app.post("/api/getNumNewsletters", routes.getNumNewsletters);
 app.post("/api/getNewsletters", routes.getNewsletters);
-app.post("/api/getNewsletterInfo", routes.getNewsletterInfo);
+
+app.post("/api/uploadNewsletter", routes.uploadNewsletters);
 
 app.get("/main", routes.listAllTopics);
 
-app.post("/main", routes.showNewsletters);
 
 server.listen(9000, function () {
     console.log("Listening on 9000");
