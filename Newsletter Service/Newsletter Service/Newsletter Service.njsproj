@@ -5,7 +5,7 @@
     <Name>Newsletter Service</Name>
     <RootNamespace>Newsletter Service</RootNamespace>
     <SaveNodeJsSettingsInProjectFile>True</SaveNodeJsSettingsInProjectFile>
-    <LaunchUrl>/users</LaunchUrl>
+    <LaunchUrl>/main</LaunchUrl>
     <ScriptArguments>
     </ScriptArguments>
     <NodeExeArguments>
@@ -39,7 +39,13 @@
     <Content Include="js\collections\db.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="js\main.js" />
+    <Content Include="js\controller\apiCalls.js" />
+    <Content Include="js\main.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="js\models\Newsletter.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="js\models\Subscription.js">
       <SubType>Code</SubType>
     </Content>
@@ -52,13 +58,8 @@
     <Content Include="js\routes\routes.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="js\views\users.ejs">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="public\account.html">
-      <SubType>Code</SubType>
-    </Content>
-    <Content Include="public\main.html" />
+    <Content Include="js\views\main.ejs" />
+    <Content Include="newsletters\account.html" />
     <Content Include="server.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
@@ -68,10 +69,10 @@
     <Folder Include="js\" />
     <Folder Include="js\collections\" />
     <Folder Include="js\models\" />
+    <Folder Include="js\controller\" />
     <Folder Include="js\routes\" />
-    <Folder Include="js\templates\" />
     <Folder Include="js\views\" />
-    <Folder Include="public\" />
+    <Folder Include="newsletters\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

@@ -9,8 +9,12 @@ let topicSchema = new mongoose.Schema({
 let Topic = mongoose.model('topics', topicSchema);
 
 async function getTopics() {
-    let topics = await Topic.find();//await mongoose.connection.db.collection('data').find();
+    let topics = await Topic.find().sort([["topicID", "asc"]]);
     return topics;
+}
+
+async function addTopic(topicID, topicName, topicDescription) {
+    await Topic.create({ topicID: topicID, topicName: topicName, topicDescription: topicDescription });
 }
 
 /* USER */
@@ -44,6 +48,28 @@ async function getSubscriptions() {
     return subs;
 }
 
+/* NEWSLETTER*/
+let newsletterSchema = new mongoose.Schema({
+    newsletterID: Number,
+    topicID: Number,
+    title: String,
+    date: String,
+    URL: String
+});
+let Newsletter = mongoose.model("newsletters", newsletterSchema);
+
+async function getNewsletters() {
+    let newsletters = await Newsletter.find();
+    return newsletters;
+}
+
+async function addNewsletter(newsletterID, topicID, title, date, URL) {
+    await Newsletter.create({ newsletterID: newsletterID, topicID: topicID, title: title, date: date, URL: URL });
+}
+
 module.exports.getUsers = getUsers;
 module.exports.getTopics = getTopics;
 module.exports.getSubscriptions = getSubscriptions;
+module.exports.addTopic = addTopic;
+module.exports.getNewsletters = getNewsletters;
+module.exports.addNewsletter = addNewsletter;

@@ -4,6 +4,11 @@ let path = require("path");
 let http = require("http");
 let bodyParser = require("body-parser")
 let routes = require("./js/routes/routes.js");
+let multer = require('multer');
+//let jQuery = require("jQuery");
+//let jsdom = require("jsdom").jsdom;
+
+
 
 // Setup the Server and App.
 let app = express();
@@ -21,7 +26,6 @@ mongoose.connection.on('connected', function () {
     console.log("Connected to DB: " + mongoose.connection.db.databaseName);
 });
 
-
 //POST Form Processing
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,7 +35,7 @@ app.set("views", path.join(__dirname, "js/views"));
 app.set("view engine", "ejs");
 
 //Statics
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "newsletters")));
 app.use(express.static(path.join(__dirname, "css")));
 app.use(express.static(path.join(__dirname, "js")));
 
@@ -39,6 +43,14 @@ app.use(express.static(path.join(__dirname, "js")));
 app.post("/api/getUsers", routes.getAllUsers);
 app.post("/api/getTopics", routes.getAllTopics);
 app.post("/api/getSubscriptions", routes.getAllSubscriptions);
+app.post("/api/addTopic", routes.addTopic);
+app.post("/api/getNewsletters", routes.getNewsletters);
+app.post("/api/moveFile", routes.moveFile);
+
+app.post("/api/uploadNewsletter", routes.uploadNewsletters);
+
+app.get("/main", routes.listAllTopics);
+
 
 server.listen(9000, function () {
     console.log("Listening on 9000");
