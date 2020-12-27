@@ -54,7 +54,7 @@ let newsletterSchema = new mongoose.Schema({
     topicID: Number,
     title: String,
     date: String,
-    url: String
+    URL: String
 });
 let Newsletter = mongoose.model("newsletters", newsletterSchema);
 
@@ -63,8 +63,13 @@ async function getNewsletters() {
     return newsletters;
 }
 
+async function addNewsletter(newsletterID, topicID, title, date, URL) {
+    await Newsletter.create({ newsletterID: newsletterID, topicID: topicID, title: title, date: date, URL: URL });
+}
+
 module.exports.getUsers = getUsers;
 module.exports.getTopics = getTopics;
 module.exports.getSubscriptions = getSubscriptions;
 module.exports.addTopic = addTopic;
 module.exports.getNewsletters = getNewsletters;
+module.exports.addNewsletter = addNewsletter;

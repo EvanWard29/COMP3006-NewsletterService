@@ -15,6 +15,9 @@
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+    <!-- jQuery Plugins-->
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+
     <!-- Bootstrap jQuery Plugins-->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
             integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -116,7 +119,7 @@
                     <p id="newTopicErr" class="invalid" hidden>Topic Name and Topic Description Cannot be Empty!</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btnAddChore">Add Topic</button>
+                    <button type="button" class="btn btn-primary" id="btnAddTopic">Add Topic</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
@@ -156,12 +159,13 @@
                 </div>
                 <div class="modal-body text-center">
 
-                    <form method="POST" action="/api/uploadNewsletter" enctype="multipart/form-data">
-                        <div>
-                            <input type="file" name="newNewsletters" />
+                    <form id="uploadNewsletter" enctype="multipart/form-data" action="/api/uploadNewsletter" method="post">
+                        <div class="form-group">
+                            <input type="file" name="newsletter" id="fileUpload" />
+                            <p id="newsletterErr" class="invalid" hidden>Newsletter Already Exists</p>
                         </div>
-                        <div>
-                            <input type="submit" name="btnUpload" value="Upload" />
+                        <div class="form-group">
+                            <input class="btn btn-primary margin" type="submit" value="Upload Newsletter" name="submit">
                         </div>
                     </form>
 

@@ -45,6 +45,7 @@ app.post("/api/getTopics", routes.getAllTopics);
 app.post("/api/getSubscriptions", routes.getAllSubscriptions);
 app.post("/api/addTopic", routes.addTopic);
 app.post("/api/getNewsletters", routes.getNewsletters);
+app.post("/api/moveFile", routes.moveFile);
 
 app.post("/api/uploadNewsletter", routes.uploadNewsletters);
 
