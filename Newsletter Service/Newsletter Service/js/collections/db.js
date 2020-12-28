@@ -35,6 +35,11 @@ async function getUsers() {
     return users;
 }
 
+async function getUsernames() {
+    let usernames = await User.find({}, {username: 1});
+    return usernames;
+}
+
 /* SUBSCRIPTION*/
 let subscriptionSchema = new mongoose.Schema({
     subscriptionID: String,
@@ -73,3 +78,4 @@ module.exports.getSubscriptions = getSubscriptions;
 module.exports.addTopic = addTopic;
 module.exports.getNewsletters = getNewsletters;
 module.exports.addNewsletter = addNewsletter;
+module.exports.getUsernames = getUsernames;

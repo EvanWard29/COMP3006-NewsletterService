@@ -4,11 +4,6 @@ let path = require("path");
 let http = require("http");
 let bodyParser = require("body-parser")
 let routes = require("./js/routes/routes.js");
-let multer = require('multer');
-//let jQuery = require("jQuery");
-//let jsdom = require("jsdom").jsdom;
-
-
 
 // Setup the Server and App.
 let app = express();
@@ -46,10 +41,18 @@ app.post("/api/getSubscriptions", routes.getAllSubscriptions);
 app.post("/api/addTopic", routes.addTopic);
 app.post("/api/getNewsletters", routes.getNewsletters);
 app.post("/api/moveFile", routes.moveFile);
-
 app.post("/api/uploadNewsletter", routes.uploadNewsletters);
+app.post("/api/register", routes.registerUser);
 
 app.get("/main", routes.listAllTopics);
+
+app.get("/login", function (request, response) {
+    response.render("login");
+})
+
+app.get("/registration", function (request, response) {
+    response.render("registration");
+})
 
 
 server.listen(9000, function () {

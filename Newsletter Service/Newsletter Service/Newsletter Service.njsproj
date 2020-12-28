@@ -40,6 +40,9 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="js\controller\apiCalls.js" />
+    <Content Include="js\controller\registration.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="js\main.js">
       <SubType>Code</SubType>
     </Content>
@@ -58,7 +61,13 @@
     <Content Include="js\routes\routes.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="js\views\login.ejs">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="js\views\main.ejs" />
+    <Content Include="js\views\registration.ejs">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="newsletters\account.html" />
     <Content Include="server.js" />
     <Content Include="package.json" />

@@ -111,6 +111,50 @@ async function moveFile(request, response) {
     }
 }
 
+async function registerUser(request, response) {
+    let firstName = request.body.inpFirstName;
+    let lastName = request.body.inpLastName;
+    let username = request.body.inpUsername;
+    let email = request.body.inpEmail;
+    let password = request.body.inpPassword;
+    let confirm = request.body.inpConfirmPassword;
+    let dob = request.body.inpDOB;
+    let gender = request.body.inpGender;
+
+    let usernames = await db.getUsernames();
+
+    let err = false;
+
+    for (let i = 0; i < usernames.length; i++) {
+        if (usernames[i].username == username) {
+            err = true;
+            response.end("usernameErr");
+            break;
+        }
+    }
+
+    if (err != true) {
+        if (password.localeCompare(confirm) != 0) {
+            err = true;
+            response.end("passwordErr");
+        }
+    }
+
+    if (err != true) {
+        let user = {
+            fistName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+            confirm: confirm,
+            dob: dob,
+            gender: gender
+        }
+
+        response.end("success");
+    }
+}
+
 module.exports.getAllUsers = getAllUsers;
 module.exports.getAllTopics = getAllTopics;
 module.exports.getAllSubscriptions = getAllSubscriptions;
@@ -119,3 +163,4 @@ module.exports.addTopic = addTopic;
 module.exports.getNewsletters = getNewsletters;
 module.exports.uploadNewsletters = uploadNewsletters;
 module.exports.moveFile = moveFile;
+module.exports.registerUser = registerUser;
