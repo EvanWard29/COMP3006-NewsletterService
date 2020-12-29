@@ -7,15 +7,21 @@ let { encrypt, decrypt } = require('../collections/crypto.js');
 let sess;
 
 async function listAllTopics(request, response) {
-    let topics = await db.getTopics();
-    let newsletters = await db.getNewsletters();
+    if (typeof sess !== 'undefined') {
+        let topics = await db.getTopics();
+        let newsletters = await db.getNewsletters();
 
-    let data = {
-        topics: topics,
-        newsletters: newsletters
-    };
+        let data = {
+            topics: topics,
+            newsletters: newsletters
+        };
 
-    response.render("main", data);
+        response.render("main", data);
+    } else {
+        response.redirect('/login');
+    }
+
+
 }
 
 async function getAllTopics(request, response) {
