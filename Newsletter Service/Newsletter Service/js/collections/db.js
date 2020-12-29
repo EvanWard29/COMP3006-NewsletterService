@@ -55,6 +55,11 @@ async function addUser(userID, firstName, lastName, username, email, password, d
     await User.create({ userID: userID, firstName: firstName, lastName: lastName, username: username, email: email, password: password, dob: dob, gender: gender });
 }
 
+async function loginUser(email, password) {
+    let user = await User.find({ "email": email, "password": password }, { password: 0 });
+    return user;
+}
+
 /* SUBSCRIPTION*/
 let subscriptionSchema = new mongoose.Schema({
     subscriptionID: String,
@@ -91,6 +96,7 @@ async function addNewsletter(newsletterID, topicID, title, date, URL) {
 module.exports.getUsers = getUsers;
 module.exports.getUsernames = getUsernames;
 module.exports.addUser = addUser;
+module.exports.loginUser = loginUser;
 
 /* TOPIC EXPORTS */
 module.exports.getTopics = getTopics;

@@ -4,6 +4,7 @@ let path = require("path");
 let http = require("http");
 let bodyParser = require("body-parser")
 let routes = require("./js/routes/routes.js");
+let session = require("express-session");
 
 // Setup the Server and App.
 let app = express();
@@ -34,15 +35,24 @@ app.use(express.static(path.join(__dirname, "newsletters")));
 app.use(express.static(path.join(__dirname, "css")));
 app.use(express.static(path.join(__dirname, "js")));
 
-//Routes
+//User Routes
 app.post("/api/getUsers", routes.getAllUsers);
+
+//Topic Routes
 app.post("/api/getTopics", routes.getAllTopics);
-app.post("/api/getSubscriptions", routes.getAllSubscriptions);
 app.post("/api/addTopic", routes.addTopic);
+
+//Subscription Routes
+app.post("/api/getSubscriptions", routes.getAllSubscriptions);
+
+//Newsletter Routes
 app.post("/api/getNewsletters", routes.getNewsletters);
 app.post("/api/moveFile", routes.moveFile);
 app.post("/api/uploadNewsletter", routes.uploadNewsletters);
+
+//Login/Register Routes
 app.post("/api/register", routes.registerUser);
+app.post("/api/login", routes.loginUser);
 
 app.get("/main", routes.listAllTopics);
 

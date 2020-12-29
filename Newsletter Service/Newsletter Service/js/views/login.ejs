@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -31,7 +31,7 @@
     <script src="models/Newsletter.js"></script>
 
     <!-- JavaScript -->
-
+    <script src="controller/login.js"></script>
 </head>
 <body>
     <div class="container-fluid">
@@ -45,25 +45,26 @@
         <div class="col outline" style="height: 100vh">
             <h3 style="margin-top: 15px">Login</h3>
             <div class="container outline" style="margin-top: 34px; padding: 15px">
-                <form class="row g-3">
+                <label id="loginErr" class="invalid" style="font-size: 15px" hidden>Email/Password Incorrect or User Does Not Exist</label>
+                <form class="row g-3" id="login" action="/api/login" method="post">
                     <div class="col-md-12">
                         <label for="inpLoginEmail" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="inpLoginEmail" required>
+                        <input type="email" class="form-control" id="inpLoginEmail" name="inpLoginEmail" required>
                     </div>
                     <div class="col-md-12">
                         <label for="inpLoginPassword" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="inpLoginPassword" required>
+                        <input type="password" class="form-control" id="inpLoginPassword" name="inpLoginPassword" required>
                     </div>
                     <div class="col-12">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="inpRemember">
+                            <input class="form-check-input" type="checkbox" id="inpRemember" name="inpRemember">
                             <label class="form-check-label" for="inpRemember">
                                 Remember Me
                             </label>
                         </div>
                     </div>
                     <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-block" id="login">Login</button>
+                        <button type="submit" class="btn btn-primary btn-block" id="btnLogin">Login</button>
                     </div>
                 </form>
                 <div class="text-center margin">

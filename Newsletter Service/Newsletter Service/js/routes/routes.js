@@ -161,12 +161,39 @@ async function registerUser(request, response) {
     }
 }
 
+async function loginUser(request, response) {
+    let email = request.body.inpLoginEmail;
+    let password = request.body.inpLoginPassword;
+    let remember = request.body.inpRemember;
+
+    let user = await db.loginUser(email, password);
+
+    if (user === undefined || user.length == 0) {
+        response.end("existErr");
+    } else {
+        if (remember == "on") {
+            //Set User Session And Cookie Stuff
+        }
+        response.end("success");
+    }
+}
+
+/* USER EXPORTS */
 module.exports.getAllUsers = getAllUsers;
+
+/* TOPIC EXPORTS */
 module.exports.getAllTopics = getAllTopics;
-module.exports.getAllSubscriptions = getAllSubscriptions;
 module.exports.listAllTopics = listAllTopics;
 module.exports.addTopic = addTopic;
+
+/* SUBSCRIPTION EXPORTS */
+module.exports.getAllSubscriptions = getAllSubscriptions;
+
+/* NEWSLETTER EXPORTS */
 module.exports.getNewsletters = getNewsletters;
 module.exports.uploadNewsletters = uploadNewsletters;
 module.exports.moveFile = moveFile;
+
+/* LOGIN/REGISTER EXPORTS */
 module.exports.registerUser = registerUser;
+module.exports.loginUser = loginUser;
