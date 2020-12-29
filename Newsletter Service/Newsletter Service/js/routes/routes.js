@@ -122,6 +122,8 @@ async function registerUser(request, response) {
     let gender = request.body.inpGender;
 
     let usernames = await db.getUsernames();
+    let userID = usernames.length + 1;
+    
 
     let err = false;
 
@@ -142,14 +144,18 @@ async function registerUser(request, response) {
 
     if (err != true) {
         let user = {
-            fistName: firstName,
+            userID: userID,
+            firstName: firstName,
             lastName: lastName,
+            username: username,
             email: email,
             password: password,
             confirm: confirm,
             dob: dob,
             gender: gender
         }
+
+        await db.addUser(user.userID, user.firstName, user.lastName, user.username, user.email, user.password, user.dob, user.gender);
 
         response.end("success");
     }

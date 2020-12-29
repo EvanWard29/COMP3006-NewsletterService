@@ -40,6 +40,21 @@ async function getUsernames() {
     return usernames;
 }
 
+async function addUser(userID, firstName, lastName, username, email, password, dob, gender) {
+    let user = {
+        userID: userID,
+        firstName: firstName,
+        lastName: lastName,
+        username: username,
+        email: email,
+        password: password,
+        dob: dob,
+        gender: gender
+    }
+
+    await User.create({ userID: userID, firstName: firstName, lastName: lastName, username: username, email: email, password: password, dob: dob, gender: gender });
+}
+
 /* SUBSCRIPTION*/
 let subscriptionSchema = new mongoose.Schema({
     subscriptionID: String,
@@ -72,10 +87,19 @@ async function addNewsletter(newsletterID, topicID, title, date, URL) {
     await Newsletter.create({ newsletterID: newsletterID, topicID: topicID, title: title, date: date, URL: URL });
 }
 
+/* USER EXPORTS */
 module.exports.getUsers = getUsers;
+module.exports.getUsernames = getUsernames;
+module.exports.addUser = addUser;
+
+/* TOPIC EXPORTS */
 module.exports.getTopics = getTopics;
-module.exports.getSubscriptions = getSubscriptions;
 module.exports.addTopic = addTopic;
+
+/* SUBSCRIPTION EXPORTS */
+module.exports.getSubscriptions = getSubscriptions;
+
+/* NEWSLETTER EXPORTS */
 module.exports.getNewsletters = getNewsletters;
 module.exports.addNewsletter = addNewsletter;
-module.exports.getUsernames = getUsernames;
+

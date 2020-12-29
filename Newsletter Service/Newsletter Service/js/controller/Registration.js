@@ -22,16 +22,13 @@ $(function () {
                     $('#passwordErr').attr('hidden', true);
                     $('#inpPassword').removeClass("is-invalid");
                     $('#inpConfirmPassword').removeClass("is-invalid");
+
+                    alert("Sign Up Complete");
+
+                    location.replace("/login");
                 }
             }
         });
         return false;
     });
-    /*$('#register').click(function () {
-        let firstName = $('#inpFirstName').val();
-
-        $.post("/api/register", {
-            firstName: firstName
-        })
-    });*/
 });
