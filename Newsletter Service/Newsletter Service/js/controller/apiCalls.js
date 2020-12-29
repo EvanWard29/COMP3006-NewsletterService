@@ -1,5 +1,5 @@
 let Topics = [];
-let Users = [];
+let Admins = [];
 let Subscriptions = [];
 let Newsletters = [];
 
@@ -34,22 +34,45 @@ $(async function () {
         }
     });
 
-    $.post("/api/getUsers", async function (data) {
-        let users = data.users;
+    await $.post("/api/getAdmins", async function (data) {
+        let admins = data;
 
-        for (let i = 0; i < users.length; i++) {
-            await addUser(new User(users[i].userID, users[i].firstName, users[i].lastName, users[i].username,
-                users[i].email, users[i].password, users[i].dob, users[i].gender));
+        for (let i = 0; i < admins.length; i++) {
+            await addAdmin(new Admin(admins[i].adminID, admins[i].userID));
         }
-    });
+    })
 
-    $.post("/api/getSubscriptions", async function (data) {
-        let subscriptions = data.subscriptions;
+    $.post("/api/adminActive", async function (data) {
+        let user = data[0];
 
-        for (let i = 0; i < subscriptions.length; i++) {
-            await addSubscription(new Subscription(subscriptions[i].subscriptionID, subscriptions[i].userID, subscriptions[i].topicID));
+        for (let i = 0; i < Admins.length; i++) {
+            if (Admins[i].userID == user.userID) {
+                $('#btnNewTopic').attr('hidden', false);
+                $('#btnNewNewsletter').attr('hidden', false);
+                
+                break;
+            } else {
+                $('#btnNewTopic').attr('hidden', true);
+                $('#btnNewNewsletter').attr('hidden', true);
+            }
         }
-    });
+    })
+    //$.post("/api/getUsers", async function (data) {
+    //    let users = data.users;
+
+    //    for (let i = 0; i < users.length; i++) {
+    //        await addUser(new User(users[i].userID, users[i].firstName, users[i].lastName, users[i].username,
+    //            users[i].email, users[i].password, users[i].dob, users[i].gender));
+    //    }
+    //});
+
+    //$.post("/api/getSubscriptions", async function (data) {
+    //    let subscriptions = data.subscriptions;
+
+    //    for (let i = 0; i < subscriptions.length; i++) {
+    //        await addSubscription(new Subscription(subscriptions[i].subscriptionID, subscriptions[i].userID, subscriptions[i].topicID));
+    //    }
+    //});
 
     $.post("/api/getNewsletters", async function (data) {
         let newsletters = data.newsletters;
@@ -67,8 +90,8 @@ function addTopic(topic) {
     Topics.push(topic);
 }
 
-function addUser(user) {
-    Users.push(user);
+function addAdmin(admin) {
+    Admins.push(admin);
 }
 
 function addSubscription(subscription) {
@@ -79,26 +102,3 @@ function addNewsletter(newsletter) {
     Newsletters.push(newsletter);
 }
 
-/*async function addNewsletter(topicName, data) {
-    //console.log(data);
-    data.forEach(async function (date) {
-        await $.post("/api/getNewsletterInfo", {
-            topicName: topicName,
-            date: date
-        }, async function (title) {
-                let titleName = "";
-                title.forEach(function (info) {
-                    if (info != "info.json") {
-                        titleName = info;
-                    }
-                });
-
-                let topic = {
-                    topicName: topicName,
-                    date: date,
-                    title: titleName
-                };
-                await Newsletters.push(topic);
-        });
-    });
-}*/

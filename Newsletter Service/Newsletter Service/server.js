@@ -4,6 +4,7 @@ let path = require("path");
 let http = require("http");
 let bodyParser = require("body-parser")
 let routes = require("./js/routes/routes.js");
+let session = require("express-session");
 
 // Setup the Server and App.
 let app = express();
@@ -21,6 +22,12 @@ mongoose.connection.on('connected', function () {
     console.log("Connected to DB: " + mongoose.connection.db.databaseName);
 });
 
+//POST Form Processing
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: true }));
+
 //View Engine Configuration
 app.set("views", path.join(__dirname, "js/views"));
 app.set("view engine", "ejs");
@@ -32,6 +39,11 @@ app.use(express.static(path.join(__dirname, "js")));
 
 //User Routes
 app.post("/api/getUsers", routes.getAllUsers);
+app.post("/api/sessionTest", routes.sessionTest);
+
+//Admin Routes
+app.post("/api/getAdmins", routes.getAdmins);
+app.post("/api/adminActive", routes.adminActive);
 
 //Topic Routes
 app.post("/api/getTopics", routes.getAllTopics);

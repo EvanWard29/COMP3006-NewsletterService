@@ -65,6 +65,18 @@ async function getUserDetails(email) {
     return user;
 }
 
+/* ADMIN */
+let adminSchema = new mongoose.Schema({
+    adminID: String,
+    userID: String
+})
+let Admin = mongoose.model("admins", adminSchema);
+
+async function getAdmins() {
+    let admins = await Admin.find();
+    return admins;
+}
+
 /* SUBSCRIPTION*/
 let subscriptionSchema = new mongoose.Schema({
     subscriptionID: String,
@@ -101,6 +113,7 @@ async function addNewsletter(newsletterID, topicID, title, date, URL) {
 module.exports.getUsers = getUsers;
 module.exports.getUsernames = getUsernames;
 module.exports.getUserDetails = getUserDetails;
+module.exports.getAdmins = getAdmins;
 
 /* TOPIC EXPORTS */
 module.exports.getTopics = getTopics;

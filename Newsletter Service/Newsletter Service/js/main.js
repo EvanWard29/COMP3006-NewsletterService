@@ -1,14 +1,5 @@
 let Folders = [];
 $(function () {
-    if (sessionStorage.getItem("ADMIN") == "true") {
-        $('#btnNewTopic').attr('hidden', false);
-        $('#btnNewNewsletter').attr('hidden', false);
-    }
-    else {
-        $('#btnNewTopic').attr('hidden', true);
-        $('#btnNewNewsletter').attr('hidden', true);
-    }
-
     $("td").click(async function () {
         let id = $(this).attr('id');
         let oldID = localStorage.getItem('topic');

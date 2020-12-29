@@ -3,7 +3,7 @@ let fs = require('fs');
 let multer = require('multer');
 let path = require("path");
 let { encrypt, decrypt } = require('../collections/crypto.js');
-let session = require("express-session");
+
 let sess;
 
 async function listAllTopics(request, response) {
@@ -190,13 +190,35 @@ async function loginUser(request, response) {
             sess = request.session;
             sess.user = user;
 
-            //response.end("success");
+            response.end("success");
         }
     }
 }
 
+async function getAdmins(request, response) {
+    let admins = await db.getAdmins();
+
+    response.send(admins);
+}
+
+async function adminActive(request, response) {
+    response.send(sess.user);
+}
+
+async function sessionTest(request, response) {
+    let user = sess.user;
+
+    response.send(user);
+}
+
 /* USER EXPORTS */
 module.exports.getAllUsers = getAllUsers;
+
+/* ADMIN EXPORTS */
+module.exports.getAdmins = getAdmins;
+module.exports.adminActive = adminActive;
+
+module.exports.sessionTest = sessionTest;
 
 /* TOPIC EXPORTS */
 module.exports.getAllTopics = getAllTopics;
