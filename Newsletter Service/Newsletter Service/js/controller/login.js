@@ -5,7 +5,7 @@ $(function () {
                 status('Error: ' + xhr.status);
             },
             success: function (response) {
-                if (response == "existErr") {
+                if (response == "Err") {
                     $('#loginErr').attr('hidden', false);
                     $('#inpLoginEmail').addClass("is-invalid");
                     $('#inpLoginPassword').addClass("is-invalid");

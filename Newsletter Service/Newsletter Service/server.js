@@ -4,7 +4,6 @@ let path = require("path");
 let http = require("http");
 let bodyParser = require("body-parser")
 let routes = require("./js/routes/routes.js");
-let session = require("express-session");
 
 // Setup the Server and App.
 let app = express();
@@ -21,10 +20,6 @@ mongoose.connection.on('disconnected', function () { console.log("Disconnected F
 mongoose.connection.on('connected', function () {
     console.log("Connected to DB: " + mongoose.connection.db.databaseName);
 });
-
-//POST Form Processing
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 //View Engine Configuration
 app.set("views", path.join(__dirname, "js/views"));

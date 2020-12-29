@@ -2,6 +2,9 @@ let db = require("../collections/db.js");
 let fs = require('fs');
 let multer = require('multer');
 let path = require("path");
+let { encrypt, decrypt } = require('../collections/crypto.js');
+let session = require("express-session");
+let sess;
 
 async function listAllTopics(request, response) {
     let topics = await db.getTopics();
@@ -116,8 +119,10 @@ async function registerUser(request, response) {
     let lastName = request.body.inpLastName;
     let username = request.body.inpUsername;
     let email = request.body.inpEmail;
-    let password = request.body.inpPassword;
-    let confirm = request.body.inpConfirmPassword;
+
+    let password = encrypt(Buffer.from(request.body.inpPassword, 'utf8'));
+    let confirm = encrypt(Buffer.from(request.body.inpConfirmPassword, 'utf8'));
+
     let dob = request.body.inpDOB;
     let gender = request.body.inpGender;
 
@@ -135,8 +140,9 @@ async function registerUser(request, response) {
         }
     }
 
+
     if (err != true) {
-        if (password.localeCompare(confirm) != 0) {
+        if (decrypt(password).localeCompare(decrypt(confirm)) != 0) {
             err = true;
             response.end("passwordErr");
         }
@@ -163,18 +169,29 @@ async function registerUser(request, response) {
 
 async function loginUser(request, response) {
     let email = request.body.inpLoginEmail;
-    let password = request.body.inpLoginPassword;
+    let password = encrypt(Buffer.from(request.body.inpLoginPassword));
     let remember = request.body.inpRemember;
 
-    let user = await db.loginUser(email, password);
+    let userPassword = await db.loginUser(email);
 
-    if (user === undefined || user.length == 0) {
-        response.end("existErr");
+    if (userPassword === undefined || userPassword.length == 0) {
+        response.end("Err");
     } else {
-        if (remember == "on") {
-            //Set User Session And Cookie Stuff
+        if (decrypt(userPassword[0].password) != decrypt(password)) {
+            //Passwords Do Not Match
+            response.end("Err")
+        } else {
+            if (remember == "on") {
+                //Set Cookie to Automatically Login
+            }
+
+            //Set Session with User Details
+            let user = await db.getUserDetails(email);
+            sess = request.session;
+            sess.user = user;
+
+            //response.end("success");
         }
-        response.end("success");
     }
 }
 

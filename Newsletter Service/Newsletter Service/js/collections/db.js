@@ -24,7 +24,7 @@ let userSchema = new mongoose.Schema({
     lastName: String,
     username: String,
     email: String,
-    password: String,
+    password: Object,
     dob: String,
     gender: String
 });
@@ -55,8 +55,13 @@ async function addUser(userID, firstName, lastName, username, email, password, d
     await User.create({ userID: userID, firstName: firstName, lastName: lastName, username: username, email: email, password: password, dob: dob, gender: gender });
 }
 
-async function loginUser(email, password) {
-    let user = await User.find({ "email": email, "password": password }, { password: 0 });
+async function loginUser(email) {
+    let password = await User.find({ "email": email}, { password: 1 });
+    return password;
+}
+
+async function getUserDetails(email) {
+    let user = await User.find({ "email": email }, { password: 0 });
     return user;
 }
 
@@ -95,8 +100,7 @@ async function addNewsletter(newsletterID, topicID, title, date, URL) {
 /* USER EXPORTS */
 module.exports.getUsers = getUsers;
 module.exports.getUsernames = getUsernames;
-module.exports.addUser = addUser;
-module.exports.loginUser = loginUser;
+module.exports.getUserDetails = getUserDetails;
 
 /* TOPIC EXPORTS */
 module.exports.getTopics = getTopics;
@@ -109,3 +113,6 @@ module.exports.getSubscriptions = getSubscriptions;
 module.exports.getNewsletters = getNewsletters;
 module.exports.addNewsletter = addNewsletter;
 
+/* LOGIN/REGISTRATION EXPORTS */
+module.exports.loginUser = loginUser;
+module.exports.addUser = addUser;
