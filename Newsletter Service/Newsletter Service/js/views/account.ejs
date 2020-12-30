@@ -96,12 +96,12 @@
                             </div>
                             <div class="row margin">
                                 <div class="col">
-                                    <button class="btn btn-light btn-block">Change Password</button>
+                                    <button class="btn btn-light btn-block" id="btnChangePassword">Change Password</button>
                                 </div>
                             </div>
                             <div class="row margin">
                                 <div class="col">
-                                    <button class="btn btn-danger btn-block">Delete Account</button>
+                                    <button class="btn btn-danger btn-block" id="btnDeleteAccount">Delete Account</button>
                                 </div>
                             </div>
 
@@ -138,6 +138,79 @@
                         </div>
                         <div class="col-md-12">
                             <button type="submit" class="btn btn-primary btn-block" style="margin-top: 15px;" id="btnUpdateEmail">Update</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Change Password Popup -->
+    <div class="modal" id="changePassword" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Change Password</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <form class="row g-3" id="updatePassword" action="/api/changePassword" method="post">
+                        <div class="col-md-12" hidden>
+                            <input type="email" class="form-control" id="pswrdEmail" name="email" readonly>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="invalid" style="font-size:15px" id="passwordIncorrect" hidden>Incorrect Password</label>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="currentPassword" class="form-label">Current Password</label>
+                            <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="invalid" style="font-size:15px" id="passwordMismatch" hidden>Passwords Do Not Match</label>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="newPassword" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="confirmNewPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword" required>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary btn-block" style="margin-top: 15px;" id="btnUpdatePassword">Update</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Account Popup -->
+    <div class="modal" id="deleteAccount" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete Account</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <form class="row g-3" id="updateEmail" action="/api/changeEmail" method="post">
+                        <div class="col-md-12">
+                            <label for="confirmPswrdDelete" class="form-label">Enter Password to Confirm<span class="invalid" style="font-size:15px" id="passwordErr" hidden> - Password Incorrect</span></label>
+                            <input type="password" class="form-control" id="confirmPswrdDelete" name="confirmPswrdDelete" required>
+                        </div>
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-primary btn-block" style="margin-top: 15px;" id="btnConfirmDeleteAccount">Delete</button>
                         </div>
                     </form>
                 </div>

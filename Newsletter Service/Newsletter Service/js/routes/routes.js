@@ -281,11 +281,39 @@ async function changeEmail(request, response) {
     }
 }
 
+async function changePassword(request, response) {
+    let email = request.body.email;
+    let oldPassword = encrypt(Buffer.from(request.body.currentPassword));
+    let newPassword = encrypt(Buffer.from(request.body.newPassword));
+    let confirm = encrypt(Buffer.from(request.body.confirmNewPassword));
+
+    if (decrypt(newPassword).localeCompare(decrypt(confirm)) != 0) {
+        err = true;
+        response.end("passwordErr");
+    } else {
+        let userPassword = await db.loginUser(email);
+
+        if (userPassword === undefined || userPassword.length == 0) {
+            response.end("Err");
+        } else {
+            if (decrypt(userPassword[0].password) != decrypt(oldPassword)) {
+                //Passwords Do Not Match
+                response.end("incorrectPswrd")
+            } else {
+                //Update Password
+                await db.updatePassword(sess.user, newPassword);
+                response.end("success");
+            }
+        }
+    }
+}
+
 /* USER EXPORTS */
 module.exports.getAllUsers = getAllUsers;
 module.exports.getUserDetails = getUserDetails;
 module.exports.account = account;
 module.exports.changeEmail = changeEmail;
+module.exports.changePassword = changePassword;
 
 /* ADMIN EXPORTS */
 module.exports.getAdmins = getAdmins;

@@ -74,6 +74,10 @@ async function updateEmail(userID, email) {
     await User.update({ "userID": userID }, { $set: { email: email } });
 }
 
+async function updatePassword(userID, password) {
+    await User.update({ "userID": userID }, { $set: { password: password } })
+}
+
 /* ADMIN */
 let adminSchema = new mongoose.Schema({
     adminID: String,
@@ -125,6 +129,7 @@ module.exports.getUsernames = getUsernames;
 module.exports.getUserDetails = getUserDetails;
 module.exports.getAdmins = getAdmins;
 module.exports.updateEmail = updateEmail;
+module.exports.updatePassword = updatePassword;
 
 /* TOPIC EXPORTS */
 module.exports.getTopics = getTopics;
