@@ -17,6 +17,7 @@
 
     <!-- jQuery Plugins-->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
     <!-- Bootstrap jQuery Plugins-->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
@@ -57,7 +58,15 @@
                     </div>
                     <div class="col-12">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="inpRemember" name="inpRemember">
+                            <input class="form-check-input" type="checkbox" id="inpCookies" name="inpCookies" required>
+                            <label class="form-check-label" for="inpCookies">
+                                I agree to the use of cookies.
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="inpRemember" name="inpRemember" disabled>
                             <label class="form-check-label" for="inpRemember">
                                 Remember Me
                             </label>

@@ -26,9 +26,17 @@ $(function () {
                     alert("Sign Up Complete");
 
                     location.replace("/login");
+                } else if (response == "agreeErr") {
+                    $('#agreeErr').attr('hidden', false);
                 }
             }
         });
         return false;
     });
+
+    $('#inpAgree').click(function () {
+        if ($('#inpAgree').prop('checked') == true) {
+            $('#agreeErr').attr('hidden', true);
+        }
+    })
 });

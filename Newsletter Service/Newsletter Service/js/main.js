@@ -116,6 +116,18 @@ $(function () {
         });
         return false;
     });
+
+    $('#btnLogout').click(async function () {
+        //Delete Cookie
+        Cookies.remove("user");
+
+        //Destroy Session
+        await $.post("/api/logout");
+
+        //Remove Topic ID
+        localStorage.removeItem("topic");
+        location.reload();
+    })
 });
 
 function getNewsletters(id) {

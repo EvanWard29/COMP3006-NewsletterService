@@ -7,6 +7,7 @@
     "name": ""
   },
   "dependencies": {
+    "cookie": "^0.4.1",
     "crypto": "^1.0.1",
     "express-session": "^1.17.1",
     "jQuery": "^1.7.4",

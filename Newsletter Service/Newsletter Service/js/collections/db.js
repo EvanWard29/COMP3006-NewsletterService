@@ -35,6 +35,11 @@ async function getUsers() {
     return users;
 }
 
+async function getUser(userID) {
+    let user = await User.find({ "userID": userID.toString() }, { password: 0 });
+    return user;
+}
+
 async function getUsernames() {
     let usernames = await User.find({}, {username: 1});
     return usernames;
@@ -63,6 +68,10 @@ async function loginUser(email) {
 async function getUserDetails(email) {
     let user = await User.find({ "email": email }, { password: 0 });
     return user;
+}
+
+async function updateEmail(userID, email) {
+    await User.update({ "userID": userID }, { $set: { email: email } });
 }
 
 /* ADMIN */
@@ -111,9 +120,11 @@ async function addNewsletter(newsletterID, topicID, title, date, URL) {
 
 /* USER EXPORTS */
 module.exports.getUsers = getUsers;
+module.exports.getUser = getUser;
 module.exports.getUsernames = getUsernames;
 module.exports.getUserDetails = getUserDetails;
 module.exports.getAdmins = getAdmins;
+module.exports.updateEmail = updateEmail;
 
 /* TOPIC EXPORTS */
 module.exports.getTopics = getTopics;

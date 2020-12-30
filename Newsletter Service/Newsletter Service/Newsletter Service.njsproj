@@ -40,6 +40,9 @@
     <Content Include="js\collections\db.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="js\collections\js-cookie.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="js\controller\apiCalls.js" />
     <Content Include="js\controller\login.js" />
     <Content Include="js\controller\registration.js">

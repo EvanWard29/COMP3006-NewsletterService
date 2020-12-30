@@ -43,10 +43,10 @@ $(async function () {
     })
 
     $.post("/api/adminActive", async function (data) {
-        let user = data[0];
+        let user = data;
 
         for (let i = 0; i < Admins.length; i++) {
-            if (Admins[i].userID == user.userID) {
+            if (Admins[i].userID == user) {
                 $('#btnNewTopic').attr('hidden', false);
                 $('#btnNewNewsletter').attr('hidden', false);
                 

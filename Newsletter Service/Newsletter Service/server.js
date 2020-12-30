@@ -39,7 +39,8 @@ app.use(express.static(path.join(__dirname, "js")));
 
 //User Routes
 app.post("/api/getUsers", routes.getAllUsers);
-app.post("/api/sessionTest", routes.sessionTest);
+app.post("/api/getUserDetails", routes.getUserDetails);
+app.post("/api/changeEmail", routes.changeEmail);
 
 //Admin Routes
 app.post("/api/getAdmins", routes.getAdmins);
@@ -60,8 +61,11 @@ app.post("/api/uploadNewsletter", routes.uploadNewsletters);
 //Login/Register Routes
 app.post("/api/register", routes.registerUser);
 app.post("/api/login", routes.loginUser);
+app.post("/api/logout", routes.logoutUser);
 
 app.get("/main", routes.listAllTopics);
+
+app.get("/account", routes.account);
 
 app.get("/login", function (request, response) {
     response.render("login");

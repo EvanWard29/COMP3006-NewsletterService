@@ -54,8 +54,8 @@
                         <label for="inpLastName" class="form-label">Last Name</label>
                         <input type="text" class="form-control" id="inpLastName" name="inpLastName" required>
                     </div>
-        
-                
+
+
                     <div class="col-6">
                         <label for="inpUsername" class="form-label">Username<span id="usernameErr" class="invalid" style="font-size: 15px" hidden> - Username Exists</span></label>
                         <input type="text" class="form-control" id="inpUsername" name="inpUsername" required>
@@ -64,8 +64,8 @@
                         <label for="inpEmail" class="form-label">Email</label>
                         <input type="email" class="form-control" id="inpEmail" name="inpEmail" required>
                     </div>
-              
-            
+
+
                     <div class="col-6">
                         <label for="inpPassword" class="form-label">Password <span id="passwordErr" class="invalid" style="font-size: 15px" hidden> - Passwords Do Not Match</span></label>
                         <input type="password" class="form-control" id="inpPassword" name="inpPassword" required>
@@ -74,8 +74,8 @@
                         <label for="inpConfirmPassword" class="form-label">Confirm Password</label>
                         <input type="password" class="form-control" id="inpConfirmPassword" name="inpConfirmPassword" required>
                     </div>
-               
-                
+
+
                     <div class="col-6">
                         <label for="inpDOB" class="form-label">Date of Birth</label>
                         <input type="date" class="form-control" id="inpDOB" name="inpDOB" required>
@@ -89,7 +89,16 @@
                             <option>Other</option>
                         </select>
                     </div>
-            
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="inpAgree" name="inpAgree">
+                            <label class="form-check-label" for="inpAgree">
+                                I agree that my personal details be used by "This Is It" and that I have the right to edit and delete my details whenever I request.
+                                <span class="invalid" style="font-size: 15px" id="agreeErr" hidden> - You Must Agree Before You Can Continue</span>
+                            </label>
+                        </div>
+                    </div>
+
                     <div class="col-12" style="margin-top:15px">
                         <button class="btn btn-primary btn-block" id="register">Sign Up</button>
                     </div>
