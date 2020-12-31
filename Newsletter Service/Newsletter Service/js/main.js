@@ -1,14 +1,5 @@
 let Folders = [];
 $(function () {
-    if (sessionStorage.getItem("ADMIN") == "true") {
-        $('#btnNewTopic').attr('hidden', false);
-        $('#btnNewNewsletter').attr('hidden', false);
-    }
-    else {
-        $('#btnNewTopic').attr('hidden', true);
-        $('#btnNewNewsletter').attr('hidden', true);
-    }
-
     $("td").click(async function () {
         let id = $(this).attr('id');
         let oldID = localStorage.getItem('topic');
@@ -125,6 +116,18 @@ $(function () {
         });
         return false;
     });
+
+    $('#btnLogout').click(async function () {
+        //Delete Cookie
+        Cookies.remove("user");
+
+        //Destroy Session
+        await $.post("/api/logout");
+
+        //Remove Topic ID
+        localStorage.removeItem("topic");
+        location.reload();
+    })
 });
 
 function getNewsletters(id) {

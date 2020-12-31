@@ -4,11 +4,7 @@ let path = require("path");
 let http = require("http");
 let bodyParser = require("body-parser")
 let routes = require("./js/routes/routes.js");
-let multer = require('multer');
-//let jQuery = require("jQuery");
-//let jsdom = require("jsdom").jsdom;
-
-
+let session = require("express-session");
 
 // Setup the Server and App.
 let app = express();
@@ -30,6 +26,8 @@ mongoose.connection.on('connected', function () {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: true }));
+
 //View Engine Configuration
 app.set("views", path.join(__dirname, "js/views"));
 app.set("view engine", "ejs");
@@ -39,17 +37,45 @@ app.use(express.static(path.join(__dirname, "newsletters")));
 app.use(express.static(path.join(__dirname, "css")));
 app.use(express.static(path.join(__dirname, "js")));
 
-//Routes
+//User Routes
 app.post("/api/getUsers", routes.getAllUsers);
+app.post("/api/getUserDetails", routes.getUserDetails);
+app.post("/api/changeEmail", routes.changeEmail);
+app.post("/api/changePassword", routes.changePassword);
+app.post("/api/deleteAccount", routes.deleteAccount);
+
+//Admin Routes
+app.post("/api/getAdmins", routes.getAdmins);
+app.post("/api/adminActive", routes.adminActive);
+
+//Topic Routes
 app.post("/api/getTopics", routes.getAllTopics);
-app.post("/api/getSubscriptions", routes.getAllSubscriptions);
 app.post("/api/addTopic", routes.addTopic);
+
+//Subscription Routes
+app.post("/api/getSubscriptions", routes.getAllSubscriptions);
+
+//Newsletter Routes
 app.post("/api/getNewsletters", routes.getNewsletters);
 app.post("/api/moveFile", routes.moveFile);
-
 app.post("/api/uploadNewsletter", routes.uploadNewsletters);
 
+//Login/Register Routes
+app.post("/api/register", routes.registerUser);
+app.post("/api/login", routes.loginUser);
+app.post("/api/logout", routes.logoutUser);
+
 app.get("/main", routes.listAllTopics);
+
+app.get("/account", routes.account);
+
+app.get("/login", function (request, response) {
+    response.render("login");
+})
+
+app.get("/registration", function (request, response) {
+    response.render("registration");
+})
 
 
 server.listen(9000, function () {

@@ -2,17 +2,37 @@ let db = require("../collections/db.js");
 let fs = require('fs');
 let multer = require('multer');
 let path = require("path");
+let { encrypt, decrypt } = require('../collections/crypto.js');
+let cookie = require("cookie");
+
+let sess;
 
 async function listAllTopics(request, response) {
-    let topics = await db.getTopics();
-    let newsletters = await db.getNewsletters();
+    let userCookie = cookie.parse(request.headers.cookie);
+    
+    if (typeof userCookie.user !== 'undefined') {
+        //If a Cookie is Set, set the User Session
+        sess = request.session;
+        sess.user = userCookie.user;
+    }
 
-    let data = {
-        topics: topics,
-        newsletters: newsletters
-    };
+    if (typeof sess !== 'undefined') {
+        //If a Session is Set
 
-    response.render("main", data);
+        let topics = await db.getTopics();
+        let newsletters = await db.getNewsletters();
+
+        let data = {
+            topics: topics,
+            newsletters: newsletters
+        };
+
+        response.render("main", data);
+
+    } else {
+        //Otherwise Redirect to Login Page
+        response.redirect('/login');
+    }
 }
 
 async function getAllTopics(request, response) {
@@ -33,6 +53,13 @@ async function getAllUsers(request, response) {
     let data = { users: users };
 
     response.send(data);
+}
+
+async function getUserDetails(request, response) {
+    let userID = sess.user;
+    let user = await db.getUser(userID);
+
+    response.send(user);
 }
 
 async function getAllSubscriptions(request, response) {
@@ -111,11 +138,223 @@ async function moveFile(request, response) {
     }
 }
 
+async function registerUser(request, response) {
+    let agree = request.body.inpAgree;
+
+    if (agree == "on") {
+        let firstName = request.body.inpFirstName;
+        let lastName = request.body.inpLastName;
+        let username = request.body.inpUsername;
+        let email = request.body.inpEmail;
+
+        let password = encrypt(Buffer.from(request.body.inpPassword, 'utf8'));
+        let confirm = encrypt(Buffer.from(request.body.inpConfirmPassword, 'utf8'));
+
+        let dob = request.body.inpDOB;
+        let gender = request.body.inpGender;
+
+        let usernames = await db.getUsernames();
+        let userID = usernames.length + 1;
+
+
+        let err = false;
+
+        for (let i = 0; i < usernames.length; i++) {
+            if (usernames[i].username == username) {
+                err = true;
+                response.end("usernameErr");
+                break;
+            }
+        }
+
+
+        if (err != true) {
+            if (decrypt(password).localeCompare(decrypt(confirm)) != 0) {
+                err = true;
+                response.end("passwordErr");
+            }
+        }
+
+        if (err != true) {
+            let user = {
+                userID: userID,
+                firstName: firstName,
+                lastName: lastName,
+                username: username,
+                email: email,
+                password: password,
+                confirm: confirm,
+                dob: dob,
+                gender: gender
+            }
+
+            await db.addUser(user.userID, user.firstName, user.lastName, user.username, user.email, user.password, user.dob, user.gender);
+
+            response.end("success");
+        }
+    } else {
+        response.end("agreeErr");
+    }
+}
+
+async function loginUser(request, response) {
+    let email = request.body.inpLoginEmail;
+    let password = encrypt(Buffer.from(request.body.inpLoginPassword));
+    let remember = request.body.inpRemember;
+
+    let userPassword = await db.loginUser(email);
+
+    if (userPassword === undefined || userPassword.length == 0) {
+        response.end("Err");
+    } else {
+        if (decrypt(userPassword[0].password) != decrypt(password)) {
+            //Passwords Do Not Match
+            response.end("Err")
+        } else {
+            //Set Session with User Details
+            let user = await db.getUserDetails(email);
+            sess = request.session;
+            sess.user = user[0].userID;
+
+            if (remember == "on") {
+                //Return UserID for Cookie Setting
+                response.send("user" + sess.user);
+         
+            } else {
+                response.end("success");
+            }
+        }
+    }
+}
+
+async function getAdmins(request, response) {
+    let admins = await db.getAdmins();
+
+    response.send(admins);
+}
+
+async function adminActive(request, response) {
+    response.send(sess.user);
+}
+
+async function logoutUser(request, response) {
+    sess = undefined;
+    response.redirect("/login");
+}
+
+async function account(request, response) {
+    let userCookie = cookie.parse(request.headers.cookie);
+
+    if (typeof userCookie.user !== 'undefined') {
+        //If a Cookie is Set, set the User Session
+        sess = request.session;
+        sess.user = userCookie.user;
+    }
+
+    if (typeof sess !== 'undefined') {
+        response.render("account");
+    } else {
+        //Otherwise Redirect to Login Page
+        response.redirect('/login');
+    }
+}
+
+async function changeEmail(request, response) {
+    let currentEmail = request.body.currentEmail;
+    let newEmail = request.body.newEmail;
+    let inpPassword = encrypt(Buffer.from(request.body.emailPasswordConfirm));
+
+    let userPassword = await db.loginUser(currentEmail);
+
+    if (userPassword === undefined || userPassword.length == 0) {
+        response.end("Err");
+    } else {
+        if (decrypt(userPassword[0].password) != decrypt(inpPassword)) {
+            //Passwords Do Not Match
+            response.end("Err")
+        } else {
+            //Update Email
+            await db.updateEmail(sess.user, newEmail);
+            response.end("success");
+        }
+    }
+}
+
+async function changePassword(request, response) {
+    let email = request.body.email;
+    let oldPassword = encrypt(Buffer.from(request.body.currentPassword));
+    let newPassword = encrypt(Buffer.from(request.body.newPassword));
+    let confirm = encrypt(Buffer.from(request.body.confirmNewPassword));
+
+    if (decrypt(newPassword).localeCompare(decrypt(confirm)) != 0) {
+        err = true;
+        response.end("passwordErr");
+    } else {
+        let userPassword = await db.loginUser(email);
+
+        if (userPassword === undefined || userPassword.length == 0) {
+            response.end("Err");
+        } else {
+            if (decrypt(userPassword[0].password) != decrypt(oldPassword)) {
+                //Passwords Do Not Match
+                response.end("incorrectPswrd")
+            } else {
+                //Update Password
+                await db.updatePassword(sess.user, newPassword);
+                response.end("success");
+            }
+        }
+    }
+}
+
+async function deleteAccount(request, response) {
+    let email = request.body.deleteEmail;
+    let password = encrypt(Buffer.from(request.body.confirmPswrdDelete));
+
+    let userPassword = await db.loginUser(email);
+
+    if (userPassword === undefined || userPassword.length == 0) {
+        response.end("Err");
+    } else {
+        if (decrypt(userPassword[0].password) != decrypt(password)) {
+            //Passwords Do Not Match
+            response.end("incorrectPswrd")
+        } else {
+            //Delete Account
+
+            await db.deleteUser(sess.user);
+
+            response.end("success");
+        }
+    }
+}
+
+/* USER EXPORTS */
 module.exports.getAllUsers = getAllUsers;
+module.exports.getUserDetails = getUserDetails;
+module.exports.account = account;
+module.exports.changeEmail = changeEmail;
+module.exports.changePassword = changePassword;
+module.exports.deleteAccount = deleteAccount;
+
+/* ADMIN EXPORTS */
+module.exports.getAdmins = getAdmins;
+module.exports.adminActive = adminActive;
+
+/* TOPIC EXPORTS */
 module.exports.getAllTopics = getAllTopics;
-module.exports.getAllSubscriptions = getAllSubscriptions;
 module.exports.listAllTopics = listAllTopics;
 module.exports.addTopic = addTopic;
+
+/* SUBSCRIPTION EXPORTS */
+module.exports.getAllSubscriptions = getAllSubscriptions;
+
+/* NEWSLETTER EXPORTS */
 module.exports.getNewsletters = getNewsletters;
 module.exports.uploadNewsletters = uploadNewsletters;
 module.exports.moveFile = moveFile;
+
+/* LOGIN/REGISTER EXPORTS */
+module.exports.registerUser = registerUser;
+module.exports.loginUser = loginUser;
+module.exports.logoutUser = logoutUser;

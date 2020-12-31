@@ -73,18 +73,3 @@ class User {
     }
 }
 
-class Admin extends User {
-    constructor(UserID, FirstName, LastName, Username, Email, DOB, Gender, AdminID) {
-        super(UserID, FirstName, LastName, Username, Email, DOB, Gender);
-        this.adminID = AdminID;
-    }
-
-    /* AdminID */
-    get getAdminID() {
-        return this.adminID;
-    }
-
-    set setAdminID(AdminID) {
-        this.adminID = AdminID;
-    }
-}

@@ -36,11 +36,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="css\main.css" />
+    <Content Include="js\collections\crypto.js" />
     <Content Include="js\collections\db.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="js\collections\js-cookie.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="js\controller\account.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="js\controller\apiCalls.js" />
+    <Content Include="js\controller\login.js" />
+    <Content Include="js\controller\registration.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="js\main.js">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="js\models\Admin.js">
       <SubType>Code</SubType>
     </Content>
     <Content Include="js\models\Newsletter.js">
@@ -58,8 +72,14 @@
     <Content Include="js\routes\routes.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="js\views\login.ejs">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="js\views\main.ejs" />
-    <Content Include="newsletters\account.html" />
+    <Content Include="js\views\registration.ejs">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="js\views\account.ejs" />
     <Content Include="server.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
