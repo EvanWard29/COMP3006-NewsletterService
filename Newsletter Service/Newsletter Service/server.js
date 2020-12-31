@@ -42,6 +42,7 @@ app.post("/api/getUsers", routes.getAllUsers);
 app.post("/api/getUserDetails", routes.getUserDetails);
 app.post("/api/changeEmail", routes.changeEmail);
 app.post("/api/changePassword", routes.changePassword);
+app.post("/api/deleteAccount", routes.deleteAccount);
 
 //Admin Routes
 app.post("/api/getAdmins", routes.getAdmins);

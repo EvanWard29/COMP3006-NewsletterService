@@ -43,6 +43,9 @@
     <Content Include="js\collections\js-cookie.js">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="js\controller\account.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="js\controller\apiCalls.js" />
     <Content Include="js\controller\login.js" />
     <Content Include="js\controller\registration.js">
@@ -76,7 +79,7 @@
     <Content Include="js\views\registration.ejs">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="newsletters\account.html" />
+    <Content Include="js\views\account.ejs" />
     <Content Include="server.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />

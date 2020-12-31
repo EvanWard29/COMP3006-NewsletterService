@@ -204,9 +204,12 @@
                     </button>
                 </div>
                 <div class="modal-body text-center">
-                    <form class="row g-3" id="updateEmail" action="/api/changeEmail" method="post">
+                    <form class="row g-3" id="frmDeleteAccount" action="/api/deleteAccount" method="post">
+                        <div class="col-md-12" hidden>
+                            <input type="email" class="form-control" id="deleteEmail" name="deleteEmail" readonly>
+                        </div>
                         <div class="col-md-12">
-                            <label for="confirmPswrdDelete" class="form-label">Enter Password to Confirm<span class="invalid" style="font-size:15px" id="passwordErr" hidden> - Password Incorrect</span></label>
+                            <label for="confirmPswrdDelete" class="form-label">Enter Password to Confirm<span class="invalid" style="font-size:15px" id="confirmErr" hidden> - Password Incorrect</span></label>
                             <input type="password" class="form-control" id="confirmPswrdDelete" name="confirmPswrdDelete" required>
                         </div>
                         <div class="col-md-12">

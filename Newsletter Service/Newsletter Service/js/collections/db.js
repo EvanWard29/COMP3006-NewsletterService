@@ -78,6 +78,10 @@ async function updatePassword(userID, password) {
     await User.update({ "userID": userID }, { $set: { password: password } })
 }
 
+async function deleteUser(userID){
+    await User.deleteOne({ "userID": userID });
+}
+
 /* ADMIN */
 let adminSchema = new mongoose.Schema({
     adminID: String,
@@ -130,6 +134,7 @@ module.exports.getUserDetails = getUserDetails;
 module.exports.getAdmins = getAdmins;
 module.exports.updateEmail = updateEmail;
 module.exports.updatePassword = updatePassword;
+module.exports.deleteUser = deleteUser;
 
 /* TOPIC EXPORTS */
 module.exports.getTopics = getTopics;

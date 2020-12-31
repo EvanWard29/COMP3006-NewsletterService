@@ -16,6 +16,7 @@ $(function () {
         $('#userEmail').html(email);
         $('#currentEmail').val(email);
         $('#pswrdEmail').val(email);
+        $('#deleteEmail').val(email);
 
         $('#userDOB').html(dob);
         $('#userGender').html(gender);
@@ -91,6 +92,36 @@ $(function () {
                     $('#confirmNewPassword').removeClass("is-invalid");
 
                     alert("Password Successfully Updated");
+                    location.reload();
+                }
+            }
+        });
+        return false;
+    });
+
+    $('#frmDeleteAccount').submit(function () {
+        $(this).ajaxSubmit({
+            error: function (xhr) {
+                status('Error: ' + xhr.status);
+            },
+            success: async function (response) {
+                if (response == "incorrectPswrd") {
+                    $('#confirmErr').attr('hidden', false);
+                    $('#confirmPswrdDelete').addClass("is-invalid");
+                } else if (response == "success") {
+                    $('#confirmErr').attr('hidden', true);
+                    $('#confirmPswrdDelete').removeClass("is-invalid");
+
+                    alert("Your Account Was Successfully Deleted");
+
+                    //Delete Cookie
+                    Cookies.remove("user");
+
+                    //Destroy Session
+                    await $.post("/api/logout");
+
+                    //Remove Topic ID
+                    localStorage.removeItem("topic");
                     location.reload();
                 }
             }

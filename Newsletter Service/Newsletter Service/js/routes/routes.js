@@ -238,7 +238,6 @@ async function adminActive(request, response) {
 }
 
 async function logoutUser(request, response) {
-    console.log(sess.user);
     sess = undefined;
     response.redirect("/login");
 }
@@ -308,12 +307,35 @@ async function changePassword(request, response) {
     }
 }
 
+async function deleteAccount(request, response) {
+    let email = request.body.deleteEmail;
+    let password = encrypt(Buffer.from(request.body.confirmPswrdDelete));
+
+    let userPassword = await db.loginUser(email);
+
+    if (userPassword === undefined || userPassword.length == 0) {
+        response.end("Err");
+    } else {
+        if (decrypt(userPassword[0].password) != decrypt(password)) {
+            //Passwords Do Not Match
+            response.end("incorrectPswrd")
+        } else {
+            //Delete Account
+
+            await db.deleteUser(sess.user);
+
+            response.end("success");
+        }
+    }
+}
+
 /* USER EXPORTS */
 module.exports.getAllUsers = getAllUsers;
 module.exports.getUserDetails = getUserDetails;
 module.exports.account = account;
 module.exports.changeEmail = changeEmail;
 module.exports.changePassword = changePassword;
+module.exports.deleteAccount = deleteAccount;
 
 /* ADMIN EXPORTS */
 module.exports.getAdmins = getAdmins;
