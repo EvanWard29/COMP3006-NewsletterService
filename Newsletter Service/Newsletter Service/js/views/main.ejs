@@ -19,6 +19,9 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
 
+    <!-- Web Socket -->
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+
     <!-- Bootstrap jQuery Plugins-->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
             integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
@@ -34,10 +37,8 @@
 
     <!-- JavaScript -->
     <script src="controller/apiCalls.js"></script>
-    <script src="main.js"></script>
-
-    <style>
-    </style>
+    <script src="controller/main.js"></script>
+    <script src="controller/message.js"></script>
 
 </head>
 <body>
@@ -95,9 +96,13 @@
             </div>
         </div>
         <div class="col-2 outline">
-            <div class="container">
+            <div class="container text-center" style="height: 100%">
                 <!-- SOCIAL OPTIONS -->
-                <h3>SOCIAL OPTIONS AND CHAT</h3>
+                <h3>WEB CHAT</h3>
+                <div class="container outline" id="msgOutput"style="height: 80%">
+
+                </div>
+                <button id="send" class="btn btn-primary" style="margin-top: 15px">Send</button>
             </div>
         </div>
     </div>
