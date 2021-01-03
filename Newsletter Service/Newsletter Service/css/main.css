@@ -16,6 +16,10 @@ body {
     margin-top: 15px;
 }
 
+.marginTop{
+    margin-top: 15px;
+}
+
 .outline{
     border: black solid;
 }

@@ -12,12 +12,12 @@ async function listAllTopics(request, response) {
     
     if (typeof userCookie.user !== 'undefined') {
         //If a Cookie is Set, set the User Session
-        sess = request.session;
-        sess.user = userCookie.user;
+        //sess = request.session;
+        //sess.user = userCookie.user;
     }
 
-    if (typeof sess !== 'undefined') {
-        //If a Session is Set
+    if (typeof userCookie.user !== 'undefined') {
+        //If a Cookie is Set
 
         let topics = await db.getTopics();
         let newsletters = await db.getNewsletters();
@@ -56,7 +56,9 @@ async function getAllUsers(request, response) {
 }
 
 async function getUserDetails(request, response) {
-    let userID = sess.user;
+    let userCookie = cookie.parse(request.headers.cookie);
+
+    let userID = userCookie.user;
     let user = await db.getUser(userID);
 
     response.send(user);
@@ -213,16 +215,12 @@ async function loginUser(request, response) {
         } else {
             //Set Session with User Details
             let user = await db.getUserDetails(email);
-            sess = request.session;
-            sess.user = user[0].userID;
+           
+            //Return UserID for Cookie Setting
+            response.send("user" + user[0].userID);
 
-            if (remember == "on") {
-                //Return UserID for Cookie Setting
-                response.send("user" + sess.user);
-         
-            } else {
-                response.end("success");
-            }
+            //Remember Me Settings
+            
         }
     }
 }
@@ -234,11 +232,12 @@ async function getAdmins(request, response) {
 }
 
 async function adminActive(request, response) {
-    response.send(sess.user);
+    let userCookie = cookie.parse(request.headers.cookie);
+    response.send(userCookie.user);
 }
 
 async function logoutUser(request, response) {
-    sess = undefined;
+    //sess = undefined;
     response.redirect("/login");
 }
 
@@ -247,11 +246,11 @@ async function account(request, response) {
 
     if (typeof userCookie.user !== 'undefined') {
         //If a Cookie is Set, set the User Session
-        sess = request.session;
-        sess.user = userCookie.user;
+        //sess = request.session;
+        //sess.user = userCookie.user;
     }
 
-    if (typeof sess !== 'undefined') {
+    if (typeof userCookie.user !== 'undefined') {
         response.render("account");
     } else {
         //Otherwise Redirect to Login Page
@@ -274,7 +273,8 @@ async function changeEmail(request, response) {
             response.end("Err")
         } else {
             //Update Email
-            await db.updateEmail(sess.user, newEmail);
+            let userCookie = cookie.parse(request.headers.cookie);
+            await db.updateEmail(userCookie.user, newEmail);
             response.end("success");
         }
     }
@@ -300,7 +300,8 @@ async function changePassword(request, response) {
                 response.end("incorrectPswrd")
             } else {
                 //Update Password
-                await db.updatePassword(sess.user, newPassword);
+                let userCookie = cookie.parse(request.headers.cookie);
+                await db.updatePassword(userCookie.user, newPassword);
                 response.end("success");
             }
         }
@@ -321,8 +322,8 @@ async function deleteAccount(request, response) {
             response.end("incorrectPswrd")
         } else {
             //Delete Account
-
-            await db.deleteUser(sess.user);
+            let userCookie = cookie.parse(request.headers.cookie);
+            await db.deleteUser(userCookie.user);
 
             response.end("success");
         }

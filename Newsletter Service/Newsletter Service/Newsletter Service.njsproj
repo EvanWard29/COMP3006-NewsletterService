@@ -48,10 +48,13 @@
     </Content>
     <Content Include="js\controller\apiCalls.js" />
     <Content Include="js\controller\login.js" />
+    <Content Include="js\controller\message.js">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="js\controller\registration.js">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="js\main.js">
+    <Content Include="js\controller\main.js">
       <SubType>Code</SubType>
     </Content>
     <Content Include="js\models\Admin.js">

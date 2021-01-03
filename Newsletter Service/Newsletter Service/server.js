@@ -5,6 +5,7 @@ let http = require("http");
 let bodyParser = require("body-parser")
 let routes = require("./js/routes/routes.js");
 let session = require("express-session");
+let socketIo = require("socket.io");
 
 // Setup the Server and App.
 let app = express();
@@ -25,6 +26,15 @@ mongoose.connection.on('connected', function () {
 //POST Form Processing
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Set up the websocket.
+let io = socketIo(server);
+
+io.on("connection", function (socket) {
+    socket.on("send message", function (msg) {
+        socket.broadcast.emit("received message", msg);
+    });
+});
 
 app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: true }));
 

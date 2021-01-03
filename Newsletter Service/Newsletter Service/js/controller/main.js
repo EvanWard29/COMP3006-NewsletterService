@@ -60,14 +60,6 @@ $(function () {
         $('#upload').modal('show');
     });
 
-    /*$('#btnUpload').click(function () {
-        let newNewsletters = $('#newNewsletters').val();
-   
-        $.post("/api/uploadNewsletter", {
-            file: newNewsletters
-        })
-    });*/
-
     $('#uploadNewsletter').submit(function () {
         $(this).ajaxSubmit({
             error: function (xhr) {
@@ -122,7 +114,7 @@ $(function () {
         Cookies.remove("user");
 
         //Destroy Session
-        await $.post("/api/logout");
+        //await $.post("/api/logout");
 
         //Remove Topic ID
         localStorage.removeItem("topic");

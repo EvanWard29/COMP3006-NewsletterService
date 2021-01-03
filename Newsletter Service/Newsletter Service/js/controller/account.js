@@ -27,7 +27,7 @@ $(function () {
         Cookies.remove("user");
 
         //Destroy Session
-        await $.post("/api/logout");
+        //await $.post("/api/logout");
 
         //Remove Topic ID
         localStorage.removeItem("topic");
