@@ -10,7 +10,8 @@
           integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
     <!-- CSS -->
-    <link href="/main.css" rel="stylesheet">
+    <link href="/main.css" rel="stylesheet" />
+    <link href="/message.css" rel="stylesheet" />
 
     <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -96,11 +97,14 @@
             </div>
         </div>
         <div class="col-2 outline">
-            <div class="container text-center" style="height: 100%">
+            <div class="container text-center" style="height: 110vh">
                 <!-- SOCIAL OPTIONS -->
-                <h3>WEB CHAT</h3>
-                <div class="container outline" id="msgOutput"style="height: 80%">
+                <h3>Global Chat</h3>
+                <div class="container outline overflow-auto" id="msgOutput"style="height: 80%">
 
+                </div>
+                <div class="input-group marginTop flex-wrap" >
+                    <input type="text" id="inpMessage" style="width: 100%"/>
                 </div>
                 <button id="send" class="btn btn-primary" style="margin-top: 15px">Send</button>
             </div>
