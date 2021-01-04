@@ -36,6 +36,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="css\main.css" />
+    <Content Include="css\message.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="js\collections\crypto.js" />
     <Content Include="js\collections\db.js">
       <SubType>Code</SubType>
@@ -86,6 +89,7 @@
     <Content Include="server.js" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <Content Include="test\unit.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="css\" />
@@ -96,6 +100,7 @@
     <Folder Include="js\routes\" />
     <Folder Include="js\views\" />
     <Folder Include="newsletters\" />
+    <Folder Include="test\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
   <ProjectExtensions>

@@ -60,6 +60,11 @@ async function getUserDetails(request, response) {
 
     let userID = userCookie.user;
     let user = await db.getUser(userID);
+    console.log(user);
+
+    //let user = {
+    //    userID: "1"
+    //}
 
     response.send(user);
 }

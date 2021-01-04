@@ -9,7 +9,7 @@ let socketIo = require("socket.io");
 
 // Setup the Server and App.
 let app = express();
-let server = http.createServer(app);
+//let server = http.createServer(app);
 
 // Setup Database Connection
 let mongoose = require("mongoose");
@@ -24,32 +24,35 @@ mongoose.connection.on('connected', function () {
 });
 
 //POST Form Processing
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+/*app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));*/
 
 // Set up the websocket.
-let io = socketIo(server);
+//let io = socketIo(server);
 
-io.on("connection", function (socket) {
-    socket.on("send message", function (msg) {
-        socket.broadcast.emit("received message", msg);
-    });
-});
+//io.on("connection", function (socket) {
+//    socket.on("send message", function (msg) {
+//        socket.broadcast.emit("received message", msg);
+//    });
+//});
 
-app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: true }));
+//app.use(session({ secret: 'ssshhhhh', saveUninitialized: true, resave: true }));
 
 //View Engine Configuration
-app.set("views", path.join(__dirname, "js/views"));
-app.set("view engine", "ejs");
+/*app.set("views", path.join(__dirname, "js/views"));
+app.set("view engine", "ejs");*/
 
 //Statics
-app.use(express.static(path.join(__dirname, "newsletters")));
+/*app.use(express.static(path.join(__dirname, "newsletters")));
 app.use(express.static(path.join(__dirname, "css")));
-app.use(express.static(path.join(__dirname, "js")));
+app.use(express.static(path.join(__dirname, "js")));*/
 
 //User Routes
 app.post("/api/getUsers", routes.getAllUsers);
 app.post("/api/getUserDetails", routes.getUserDetails);
+
+//app.get("/api/getUserDetails", routes.getUserDetails);
+
 app.post("/api/changeEmail", routes.changeEmail);
 app.post("/api/changePassword", routes.changePassword);
 app.post("/api/deleteAccount", routes.deleteAccount);
@@ -87,10 +90,11 @@ app.get("/registration", function (request, response) {
     response.render("registration");
 })
 
+module.exports.app = app;
 
-server.listen(9000, function () {
-    console.log("Listening on 9000");
-})
+//server.listen(9000, function () {
+//    console.log("Listening on 9000");
+//})
 
 
 
