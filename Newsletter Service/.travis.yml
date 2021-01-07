@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+- node
+install:
+- npm install -g mocha
+- npm install chai
+- npm install chai-http
+- npm install express
+- npm install cookie
+- npm install crypto
+- npm install express-session
+- npm install multer
+- npm install mongoose
+- npm install socket.io
+- npm install body-parser

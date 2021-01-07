@@ -1,161 +1,228 @@
 [{
-	"newsletterID" : 1,
-	"topicID" : 1,
-	"title" : "Asteroid Samples Returned To Earth",
-	"date" : "07-12-20",
-	"URL" : "space/07-12-20/Asteroid Samples Returned To Earth.pdf"
-},
-{
-	"newsletterID" : 2,
-	"topicID" : 1,
-	"title" : "Jupiter and Saturn Light Up The Night Sky In Rare Alignment",
-	"date" : "14-12-20",
-	"URL" : "space/14-12-20/Jupiter and Saturn Light Up The Night Sky In Rare Alignment.pdf"
-},
-{
-	"newsletterID" : 3,
-	"topicID" : 2,
-	"title" : "Vancough Painting Stolen",
-	"date" : "13-12-20",
-	"URL" : "art/13-12-20/Vancough Painting Stolen.pdf"
-},
-{
-	"newsletterID" : 4,
-	"topicID" : 3,
-	"title" : "How to Build a High Tech Shed",
-	"date" : "07-12-20",
-	"URL" : "diy/07-12-20/How to Build a High Tech Shed.pdf"
-},
-{
-	"newsletterID" : 5,
-	"topicID" : 3,
-	"title" : "DIY Go-Cart",
-	"date" : "30-11-20",
-	"URL" : "diy/30-11-20/DIY Go-Cart.pdf"
-},
-{
-	"newsletterID" : 6,
-	"topicID" : 8,
-	"title" : "Tom Cruise Fires Film Crew",
-	"date" : "05-12-20",
-	"URL" : "film/05-12-20/Tom Cruise Fires Film Crew.pdf"
-},
-{
-	"newsletterID" : 7,
-	"topicID" : 8,
-	"title" : "Covid Stops all Film Production Again",
-	"date" : "13-12-20",
-	"URL" : "film/13-12-20/Covid Stops all Film Production Again.pdf"
-},
-{
-	"newsletterID" : 8,
-	"topicID" : 8,
-	"title" : "New Chritopher Nolan Film is a HIT",
-	"date" : "15-12-20",
-	"URL" : "film/15-12-20/New Chritopher Nolan Film is a HIT.pdf"
-},
-{
-	"newsletterID" : 9,
-	"topicID" : 4,
-	"title" : "Master Cheff Winner Announced",
-	"date" : "03-12-20",
-	"URL" : "food/03-12-20/Master Cheff Winner Announced.pdf"
-},
-{
-	"newsletterID" : 10,
-	"topicID" : 4,
-	"title" : "Great British Bakeoff Crowns Winner",
-	"date" : "09-12-20",
-	"URL" : "food/09-12-20/Great British Bakeoff Crowns Winner.pdf"
-},
-{
-	"newsletterID" : 11,
-	"topicID" : "gamming",
-	"title" : "Esports Winners a Fraud",
-	"date" : "06-12-20",
-	"URL" : "gamming/06-12-20/Esports Winners a Fraud.pdf"
-},
-{
-	"newsletterID" : 12,
-	"topicID" : 5,
-	"title" : "Game Awards Winners Revealed",
-	"date" : "22-11-20",
-	"URL" : "gamming/22-11-20/Game Awards Winners Revealed.pdf"
-},
-{
-	"newsletterID" : 13,
-	"topicID" : 5,
-	"title" : "Cyberpunk 2077 Has a Bumpy Release",
-	"date" : "30-11-20",
-	"URL" : "gamming/30-11-20/Cyberpunk 2077 Has a Bumpy Release.pdf"
-},
-{
-	"newsletterID" : 14,
-	"topicID" : 7,
-	"title" : "Christmas Music Rising in The Charts",
-	"date" : "10-12-20",
-	"URL" : "music/10-12-20/Christmas Music Rising in The Charts.pdf"
-},
-{
-	"newsletterID" : 15,
-	"topicID" : 7,
-	"title" : "Mariah Carey Hits No 1 Again",
-	"date" : "13-12-20",
-	"URL" : "music/13-12-20/Mariah Carey Hits No 1 Again.pdf"
-},
-{
-	"newsletterID" : 16,
-	"topicID" : 9,
-	"title" : "Premier League Winners Crowned",
-	"date" : "02-12-20",
-	"URL" : "sports/02-12-20/Premier League Winners Crowned.pdf"
-},
-{
-	"newsletterID" : 17,
-	"topicID" : 9,
-	"title" : "Andy Murray Injured Again",
-	"date" : "11-12-20",
-	"URL" : "sports/11-12-20/Andy Murray Injured Again.pdf"
-},
-{
-	"newsletterID" : 18,
-	"topicID" : 9,
-	"title" : "NFL Winners Crowned",
-	"date" : "27-12-20",
-	"URL" : "sports/27-12-20/NFL Winners Crowned.pdf"
-},
-{
-	"newsletterID" : 19,
-	"topicID" : 6,
-	"title" : "Elon Musk Demonstrates Neuralink",
-	"date" : "22-11-20",
-	"URL" : "technology/22-11-20/Elon Musk Demonstrates Neuralink.pdf"
-},
-{
-	"newsletterID" : 20,
-	"topicID" : 10,
-	"title" : "Corona Virus On The Rise In Europe",
-	"date" : "07-12-20",
-	"URL" : "world/07-12-20/Corona Virus On The Rise In Europe.pdf"
-},
-{
-	"newsletterID" : 21,
-	"topicID" : 10,
-	"title" : "Brexit Trade Talks Stall",
-	"date" : "12-12-20",
-	"URL" : "world/12-12-20/Brexit Trade Talks Stall.pdf"
-},
-{
-	"newsletterID" : 22,
-	"topicID" : 10,
-	"title" : "Joe Biden Officially Declared President-Elect",
-	"date" : "15-12-20",
-	"URL" : "world/15-12-20/Joe Biden Officially Declared President-Elect.pdf"
-},
-{
-	"newsletterID" : 23,
-	"topicID" : 10,
-	"title" : "No Deal Brexit Likely",
-	"date" : "30-11-20",
-	"URL" : "world/30-11-20/No Deal Brexit Likely.pdf"
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1623"
+  },
+  "newsletterID": 1,
+  "topicID": 1,
+  "title": "Asteroid Samples Returned To Earth",
+  "date": "07-12-20",
+  "URL": "space/07-12-20/Asteroid Samples Returned To Earth.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1624"
+  },
+  "newsletterID": 2,
+  "topicID": 1,
+  "title": "Jupiter and Saturn Light Up The Night Sky In Rare Alignment",
+  "date": "14-12-20",
+  "URL": "space/14-12-20/Jupiter and Saturn Light Up The Night Sky In Rare Alignment.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1625"
+  },
+  "newsletterID": 3,
+  "topicID": 2,
+  "title": "Vancough Painting Stolen",
+  "date": "13-12-20",
+  "URL": "art/13-12-20/Vancough Painting Stolen.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1626"
+  },
+  "newsletterID": 4,
+  "topicID": 3,
+  "title": "How to Build a High Tech Shed",
+  "date": "07-12-20",
+  "URL": "diy/07-12-20/How to Build a High Tech Shed.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1627"
+  },
+  "newsletterID": 5,
+  "topicID": 3,
+  "title": "DIY Go-Cart",
+  "date": "30-11-20",
+  "URL": "diy/30-11-20/DIY Go-Cart.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1628"
+  },
+  "newsletterID": 6,
+  "topicID": 8,
+  "title": "Tom Cruise Fires Film Crew",
+  "date": "05-12-20",
+  "URL": "film/05-12-20/Tom Cruise Fires Film Crew.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1629"
+  },
+  "newsletterID": 7,
+  "topicID": 8,
+  "title": "Covid Stops all Film Production Again",
+  "date": "13-12-20",
+  "URL": "film/13-12-20/Covid Stops all Film Production Again.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d162a"
+  },
+  "newsletterID": 8,
+  "topicID": 8,
+  "title": "New Chritopher Nolan Film is a HIT",
+  "date": "15-12-20",
+  "URL": "film/15-12-20/New Chritopher Nolan Film is a HIT.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d162b"
+  },
+  "newsletterID": 9,
+  "topicID": 4,
+  "title": "Master Cheff Winner Announced",
+  "date": "03-12-20",
+  "URL": "food/03-12-20/Master Cheff Winner Announced.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d162c"
+  },
+  "newsletterID": 10,
+  "topicID": 4,
+  "title": "Great British Bakeoff Crowns Winner",
+  "date": "09-12-20",
+  "URL": "food/09-12-20/Great British Bakeoff Crowns Winner.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d162d"
+  },
+  "newsletterID": 11,
+  "topicID": "5",
+  "title": "Esports Winners a Fraud",
+  "date": "06-12-20",
+  "URL": "gaming/06-12-20/Esports Winners a Fraud.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d162e"
+  },
+  "newsletterID": 12,
+  "topicID": 5,
+  "title": "Game Awards Winners Revealed",
+  "date": "22-11-20",
+  "URL": "gaming/22-11-20/Game Awards Winners Revealed.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d162f"
+  },
+  "newsletterID": 13,
+  "topicID": 5,
+  "title": "Cyberpunk 2077 Has a Bumpy Release",
+  "date": "30-11-20",
+  "URL": "gaming/30-11-20/Cyberpunk 2077 Has a Bumpy Release.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1630"
+  },
+  "newsletterID": 14,
+  "topicID": 7,
+  "title": "Christmas Music Rising in The Charts",
+  "date": "10-12-20",
+  "URL": "music/10-12-20/Christmas Music Rising in The Charts.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1631"
+  },
+  "newsletterID": 15,
+  "topicID": 7,
+  "title": "Mariah Carey Hits No 1 Again",
+  "date": "13-12-20",
+  "URL": "music/13-12-20/Mariah Carey Hits No 1 Again.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1632"
+  },
+  "newsletterID": 16,
+  "topicID": 9,
+  "title": "Premier League Winners Crowned",
+  "date": "02-12-20",
+  "URL": "sports/02-12-20/Premier League Winners Crowned.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1633"
+  },
+  "newsletterID": 17,
+  "topicID": 9,
+  "title": "Andy Murray Injured Again",
+  "date": "11-12-20",
+  "URL": "sports/11-12-20/Andy Murray Injured Again.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1634"
+  },
+  "newsletterID": 18,
+  "topicID": 9,
+  "title": "NFL Winners Crowned",
+  "date": "27-12-20",
+  "URL": "sports/27-12-20/NFL Winners Crowned.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1635"
+  },
+  "newsletterID": 19,
+  "topicID": 6,
+  "title": "Elon Musk Demonstrates Neuralink",
+  "date": "22-11-20",
+  "URL": "technology/22-11-20/Elon Musk Demonstrates Neuralink.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1636"
+  },
+  "newsletterID": 20,
+  "topicID": 10,
+  "title": "Corona Virus On The Rise In Europe",
+  "date": "07-12-20",
+  "URL": "world/07-12-20/Corona Virus On The Rise In Europe.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1637"
+  },
+  "newsletterID": 21,
+  "topicID": 10,
+  "title": "Brexit Trade Talks Stall",
+  "date": "12-12-20",
+  "URL": "world/12-12-20/Brexit Trade Talks Stall.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1638"
+  },
+  "newsletterID": 22,
+  "topicID": 10,
+  "title": "Joe Biden Officially Declared President-Elect",
+  "date": "15-12-20",
+  "URL": "world/15-12-20/Joe Biden Officially Declared President-Elect.pdf"
+},{
+  "_id": {
+    "$oid": "5fe12a3217ebd351840d1639"
+  },
+  "newsletterID": 23,
+  "topicID": 10,
+  "title": "No Deal Brexit Likely",
+  "date": "30-11-20",
+  "URL": "world/30-11-20/No Deal Brexit Likely.pdf"
+},{
+  "_id": {
+    "$oid": "5fe8b714477fd22b80745d2c"
+  },
+  "newsletterID": 24,
+  "topicID": 2,
+  "title": "sample.pdf",
+  "date": "27-12-20",
+  "URL": "art/27-12-20/sample.pdf",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5feb73fdf002a012a065ce1e"
+  },
+  "newsletterID": 25,
+  "topicID": 6,
+  "title": "sample.pdf",
+  "date": "29-12-20",
+  "URL": "technology/29-12-20/sample.pdf",
+  "__v": 0
 }]
