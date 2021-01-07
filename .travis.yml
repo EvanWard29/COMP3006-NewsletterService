@@ -10,3 +10,6 @@ install:
 - npm install crypto
 - npm install express-session
 - npm install multer
+- npm install mongoose
+- npm install socket.io
+- npm install body-parser
