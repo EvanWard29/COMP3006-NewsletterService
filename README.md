@@ -1,1 +1,3 @@
-# COMP3006-NewsletterService
+# Newsletter Service
+
+
