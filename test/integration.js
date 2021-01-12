@@ -1,8 +1,6 @@
 let chai = require("chai");
 let chaiHttp = require("chai-http");
-let { encrypt, decrypt } = require('../js/collections/crypto.js');
 
-let routes = require("../js/routes/routes");
 let server = require("../server");
 
 chai.use(chaiHttp);
