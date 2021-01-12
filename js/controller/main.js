@@ -1,15 +1,16 @@
-let Folders = [];
 $(function () {
+    //If Topic selected
     $("td").click(async function () {
         let id = $(this).attr('id');
         let oldID = localStorage.getItem('topic');
 
         $('[id="topic' + oldID + '"]').attr('hidden', true);
 
-        await getNewsletters(id);
+        await getNewsletters(id); //Show Newsletters relating to that topic
     });
 
     $("#btnNewTopic").click(function () {
+        //Show New Topic popup
         $('#newTopic').modal('show');
     });
 
@@ -19,31 +20,34 @@ $(function () {
             let newTopicDescription = $('#newTopicDescription').val();
             let id = Topics[Topics.length - 1].topicID + 1;
 
+            //Create new Topic and add to DB
             let topic = new Topic(id, newTopicName, newTopicDescription);
             Topics.push(topic);
 
             addToList(topic);
-            //addToDatabase(topic);
+            addToDatabase(topic);
 
             $('#newTopic').modal('hide');
             return "DODO";
         } else {
             $('#newTopicErr').attr('hidden', false);
         }
-    
     });
 
+    //When Newsletter Clicked
     $('p').click(function () {
         let id = $(this).attr('id');
 
         if (id.replace(/[0-9]/g, '') == 'newsletter') {
             let topicID = localStorage.getItem('topic');
-            let topicName = $('#newsTopic').html();
+            let topicName = $('#topicName').html();
 
             for (let i = 0; i < Newsletters.length; i++) {
+                //Get Newsletter URL from Array of Newsletters
                 if (id.replace(/^\D+/g, '') == Newsletters[i].newsletterID) {
                     let URL = Newsletters[i].url;
 
+                    //Present Newsletter to User
                     $('#newsletterPDF').attr('src', URL);
 
                     break;
@@ -58,9 +62,11 @@ $(function () {
     });
 
     $('#btnNewNewsletter').click(function () {
+        //Show Upload Newsletter popup
         $('#upload').modal('show');
     });
 
+    //On Upload Newsletter form submit
     $('#uploadNewsletter').submit(function () {
         $(this).ajaxSubmit({
             error: function (xhr) {
@@ -88,9 +94,11 @@ $(function () {
 
                 let uploadDate = currentDate + "-" + month + "-" + year.toString().substr(-2);
 
+                //Get Date and Title for Newsletter
                 let date = uploadDate;
                 let title = $('#fileUpload').val();
 
+                //Move file from temp folder to correct topic folder
                 $.post('/api/moveFile', {
                     fileName: fileName,
                     topicName: topicName,
@@ -114,18 +122,22 @@ $(function () {
         //Delete Cookie
         Cookies.remove("user");
 
-        //Destroy Session
-        await $.post("/api/logout");
-
         //Remove Topic ID
         localStorage.removeItem("topic");
         location.reload();
     })
+
+    $('#newsletter').on('hide.bs.modal', function () {
+        $('#newsTopic').html("");
+    })
 });
 
+//Show Newsletters relating to chosen Topic
 function getNewsletters(id) {
     for (let i = 0; i < Topics.length; i++) {
         if (Topics[i].topicID == id) {
+            $('#topicName').html("");
+            $('#topicDescription').html("");
             localStorage.removeItem("topic");
 
             let topicName = Topics[i].topicName;
@@ -137,7 +149,6 @@ function getNewsletters(id) {
             localStorage.setItem("topic", id);
 
             $('#newsTopic').html(Topics[i].topicName);
-            //$('#newsletters').empty();
 
             $('[id="topic'+ id +'"]').attr('hidden', false);
 
@@ -155,6 +166,7 @@ async function addToDatabase(topic) {
     let topicName = topic.topicName;
     let topicDescription = topic.topicDescription;
 
+    //Add new topic to DB
     $.post("/api/addTopic", {
         topicID: topicID,
         topicName: topicName,

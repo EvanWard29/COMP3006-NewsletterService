@@ -1,4 +1,5 @@
 $(function () {
+    //On Registration form submit
     $('#registration').submit(function () {
         $(this).ajaxSubmit({
             error: function (xhr) {
@@ -6,9 +7,11 @@ $(function () {
             },
             success: function (response) {
                 if (response == "usernameErr") {
+                    //Username exists
                     $('#usernameErr').attr('hidden', false);
                     $('#inpUsername').addClass("is-invalid");
                 } else if (response == "passwordErr") {
+                    //Passwords don't match
                     $('#usernameErr').attr('hidden', true);
                     $('#inpUsername').removeClass("is-invalid");
 
@@ -16,6 +19,7 @@ $(function () {
                     $('#inpPassword').addClass("is-invalid");
                     $('#inpConfirmPassword').addClass("is-invalid");
                 } else if (response == "success") {
+                    //User added to DB
                     $('#usernameErr').attr('hidden', true);
                     $('#inpUsername').removeClass("is-invalid");
 

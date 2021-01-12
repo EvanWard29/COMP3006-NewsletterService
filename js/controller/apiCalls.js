@@ -1,19 +1,20 @@
 let Topics = [];
 let Admins = [];
-let Subscriptions = [];
 let Newsletters = [];
 
 $(async function () {
-    /***** Setting up arrays *****/
+/***** Setting up arrays *****/
+    //Get all Topics from DB on page load
     await $.post("/api/getTopics", async function (data) {
         let topics = data.topics;
 
         for (let i = 0; i < topics.length; i++) {
-            await addTopic(new Topic(topics[i].topicID, topics[i].topicName, topics[i].topicDescription));
+            await addTopic(new Topic(topics[i].topicID, topics[i].topicName, topics[i].topicDescription)); //Add Topic to Array
         }
 
         let id = localStorage.getItem("topic");
 
+        //If user has refreshed page, topicID should not be null
         if (id != null) {
             for (let i = 0; i < Topics.length; i++) {
                 if (Topics[i].topicID == id) {
@@ -34,6 +35,7 @@ $(async function () {
         }
     });
 
+    //Get a list of Admins from DB
     await $.post("/api/getAdmins", async function (data) {
         let admins = data;
 
@@ -42,6 +44,7 @@ $(async function () {
         }
     })
 
+    //If an Admin has logged in, show admin options
     $.post("/api/adminActive", async function (data) {
         let user = data;
 
@@ -57,23 +60,8 @@ $(async function () {
             }
         }
     })
-    //$.post("/api/getUsers", async function (data) {
-    //    let users = data.users;
 
-    //    for (let i = 0; i < users.length; i++) {
-    //        await addUser(new User(users[i].userID, users[i].firstName, users[i].lastName, users[i].username,
-    //            users[i].email, users[i].password, users[i].dob, users[i].gender));
-    //    }
-    //});
-
-    //$.post("/api/getSubscriptions", async function (data) {
-    //    let subscriptions = data.subscriptions;
-
-    //    for (let i = 0; i < subscriptions.length; i++) {
-    //        await addSubscription(new Subscription(subscriptions[i].subscriptionID, subscriptions[i].userID, subscriptions[i].topicID));
-    //    }
-    //});
-
+    //Get all Newsletters from DB on page load
     $.post("/api/getNewsletters", async function (data) {
         let newsletters = data.newsletters;
 
@@ -92,10 +80,6 @@ function addTopic(topic) {
 
 function addAdmin(admin) {
     Admins.push(admin);
-}
-
-function addSubscription(subscription) {
-    Subscriptions.push(subscription);
 }
 
 function addNewsletter(newsletter) {

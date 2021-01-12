@@ -3,8 +3,12 @@ let express = require("express");
 let path = require("path");
 let http = require("http");
 let bodyParser = require("body-parser")
-let routes = require("./js/routes/routes.js");
 let socketIo = require("socket.io");
+
+//Routes
+let newsletter = require("./js/routes/newsletter.js");
+let user = require("./js/routes/user.js");
+let topic = require("./js/routes/topic.js");
 
 // Setup the Server and App.
 let app = express();
@@ -28,7 +32,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set up the websocket.
 let io = socketIo(server);
-
 io.on("connection", function (socket) {
     socket.on("send message", function (msg) {
         socket.broadcast.emit("received message", msg);
@@ -45,37 +48,34 @@ app.use(express.static(path.join(__dirname, "css")));
 app.use(express.static(path.join(__dirname, "js")));
 
 //User Routes
-app.post("/api/getUsers", routes.getAllUsers);
-app.post("/api/getUserDetails", routes.getUserDetails);
+app.post("/api/getUsers", user.getAllUsers);
+app.post("/api/getUserDetails", user.getUserDetails);
 
-app.post("/api/changeEmail", routes.changeEmail);
-app.post("/api/changePassword", routes.changePassword);
-app.post("/api/deleteAccount", routes.deleteAccount);
+app.post("/api/changeEmail", user.changeEmail);
+app.post("/api/changePassword", user.changePassword);
+app.post("/api/deleteAccount", user.deleteAccount);
 
 //Admin Routes
-app.post("/api/getAdmins", routes.getAdmins);
-app.post("/api/adminActive", routes.adminActive);
+app.post("/api/getAdmins", user.getAdmins);
+app.post("/api/adminActive", user.adminActive);
 
 //Topic Routes
-app.post("/api/getTopics", routes.getAllTopics);
-app.post("/api/addTopic", routes.addTopic);
-
-//Subscription Routes
-app.post("/api/getSubscriptions", routes.getAllSubscriptions); /* REMOVE */
+app.post("/api/getTopics", topic.getAllTopics);
+app.post("/api/addTopic", topic.addTopic);
 
 //Newsletter Routes
-app.post("/api/getNewsletters", routes.getNewsletters);
-app.post("/api/moveFile", routes.moveFile);
-app.post("/api/uploadNewsletter", routes.uploadNewsletters);
+app.post("/api/getNewsletters", newsletter.getNewsletters);
+app.post("/api/moveFile", newsletter.moveFile);
+app.post("/api/uploadNewsletter", newsletter.uploadNewsletters);
 
 //Login/Register Routes
-app.post("/api/register", routes.registerUser);
-app.post("/api/login", routes.loginUser);
-app.post("/api/logout", routes.logoutUser);
+app.post("/api/register", user.registerUser);
+app.post("/api/login", user.loginUser);
+app.post("/api/logout", user.logoutUser);
 
-app.get("/main", routes.listAllTopics);
+app.get("/main", topic.listAllTopics);
 
-app.get("/account", routes.account);
+app.get("/account", user.account);
 
 app.get("/login", function (request, response) {
     response.render("login");
@@ -90,12 +90,3 @@ module.exports.app = app;
 server.listen(9000, function () {
     console.log("Listening on 9000");
 })
-
-
-
-
-
-
-
-
-
