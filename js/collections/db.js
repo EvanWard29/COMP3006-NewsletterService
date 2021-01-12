@@ -9,12 +9,12 @@ let topicSchema = new mongoose.Schema({
 let Topic = mongoose.model('topics', topicSchema);
 
 async function getTopics() {
-    let topics = await Topic.find().sort([["topicID", "asc"]]);
+    let topics = await Topic.find().sort([["topicID", "asc"]]); //Get all topics from DB in ascending order
     return topics;
 }
 
 async function addTopic(topicID, topicName, topicDescription) {
-    await Topic.create({ topicID: topicID, topicName: topicName, topicDescription: topicDescription });
+    await Topic.create({ topicID: topicID, topicName: topicName, topicDescription: topicDescription }); //Add new topic to DB
 }
 
 /* USER */
@@ -36,12 +36,12 @@ async function getUsers() {
 }
 
 async function getUser(userID) {
-    let user = await User.find({ "userID": userID.toString() }, { password: 0, _id: 0, __v: 0 });
+    let user = await User.find({ "userID": userID.toString() }, { password: 0, _id: 0, __v: 0 }); //Get all user details except password
     return user;
 }
 
 async function getUsernames() {
-    let usernames = await User.find({}, {username: 1});
+    let usernames = await User.find({}, {username: 1}); //Get all usernames from DB
     return usernames;
 }
 
@@ -57,6 +57,7 @@ async function addUser(userID, firstName, lastName, username, email, password, d
         gender: gender
     }
 
+    //Add new user to DB
     await User.create({ userID: userID, firstName: firstName, lastName: lastName, username: username, email: email, password: password, dob: dob, gender: gender });
 }
 
@@ -66,7 +67,7 @@ async function loginUser(email) {
 }
 
 async function getUserDetails(email) {
-    let user = await User.find({ "email": email }, { password: 0 });
+    let user = await User.find({ "email": email }, { password: 0 }); //Get user password
     return user;
 }
 
@@ -90,21 +91,8 @@ let adminSchema = new mongoose.Schema({
 let Admin = mongoose.model("admins", adminSchema);
 
 async function getAdmins() {
-    let admins = await Admin.find();
+    let admins = await Admin.find(); //Get list of all admins
     return admins;
-}
-
-/* SUBSCRIPTION*/
-let subscriptionSchema = new mongoose.Schema({
-    subscriptionID: String,
-    userID: String,
-    topicID: String
-});
-let Subscription = mongoose.model("subscriptions", subscriptionSchema);
-
-async function getSubscriptions() {
-    let subs = await Subscription.find();
-    return subs;
 }
 
 /* NEWSLETTER*/
@@ -123,7 +111,7 @@ async function getNewsletters() {
 }
 
 async function addNewsletter(newsletterID, topicID, title, date, URL) {
-    await Newsletter.create({ newsletterID: newsletterID, topicID: topicID, title: title, date: date, URL: URL });
+    await Newsletter.create({ newsletterID: newsletterID, topicID: topicID, title: title, date: date, URL: URL }); //Add new Newsletter to DB
 }
 
 /* USER EXPORTS */
@@ -132,6 +120,8 @@ module.exports.getUser = getUser;
 module.exports.getUsernames = getUsernames;
 module.exports.getUserDetails = getUserDetails;
 module.exports.getAdmins = getAdmins;
+
+/* USER OPTIONS EXPORTS */
 module.exports.updateEmail = updateEmail;
 module.exports.updatePassword = updatePassword;
 module.exports.deleteUser = deleteUser;
@@ -139,9 +129,6 @@ module.exports.deleteUser = deleteUser;
 /* TOPIC EXPORTS */
 module.exports.getTopics = getTopics;
 module.exports.addTopic = addTopic;
-
-/* SUBSCRIPTION EXPORTS */
-module.exports.getSubscriptions = getSubscriptions;
 
 /* NEWSLETTER EXPORTS */
 module.exports.getNewsletters = getNewsletters;
